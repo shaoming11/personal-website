@@ -1,16 +1,28 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 function MyComponent() {
-    const [name, setName] = useState("Guest");
+    const [width, setWidth] = useState(window.innerWidth);
+    const [height, setHeight] = useState(window.innerHeight);
 
-    const handleName = (e) => {
-        setName(e.target.value);
+    useEffect(() => {
+        document.addEventListener("resize". handleResize);
+        console.log("ADDED LISTENER");
+
+        return () => {
+            document.removeEventListener("resize");
+            console.log("REMOVED LISTENER");
+        }
+    }, [])
+
+    const handleResize = () => {
+        setWidth(window.innerWidth);
+        setHeight(window.innerHeight);
     }
 
     return (
         <div>
-            <input value={name} onChange={(e) => handleName(e)}></input>
-            <p>{name}</p>
+            <h1>Width: {width} px</h1>
+            <h1>Height: {height} px</h1>
         </div>
     )
 }
