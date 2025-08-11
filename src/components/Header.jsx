@@ -1,13 +1,24 @@
 
 function Header() {
+    const navItemClasses = "inline mx-2.5";
+    const navLinkClasses = "no-underline text-black hover:font-bold";
+
     return(
         <header>
             <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#experiences">Experiences</a></li>
-                    <li><a href="#projects">Projects</a></li>
+                <ul className="list-none flex justify-center items-center my-5">
+                    <li className={navItemClasses}>
+                        <a href="#" className={navLinkClasses}>Home</a>
+                    </li>
+                    <li className={navItemClasses}>
+                        <a href="#about" className={navLinkClasses}>About</a>
+                    </li>
+                    <li className={navItemClasses}>
+                        <a href="#experiences" className={navLinkClasses}>Experiences</a>
+                    </li>
+                    <li className={navItemClasses}>
+                        <a href="#projects" className={navLinkClasses}>Projects</a>
+                    </li>
                 </ul>
             </nav>
         </header>

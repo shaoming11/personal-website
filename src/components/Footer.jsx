@@ -1,6 +1,6 @@
 function Footer() {
     return(
-        <footer>
+        <footer className="mb-2">
             <p>&copy; {new Date().getFullYear()} shaomingwu.com</p>
         </footer>
     );

@@ -6,7 +6,7 @@ import Projects from './components/Projects.jsx'
 
 function App() {
     return(
-        <div className='page'>
+        <div className='md:w-2/5 w-4/5 m-auto'>
             <Header/>
             <Intro/>
             <Experiences/>
