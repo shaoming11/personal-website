@@ -1,4 +1,5 @@
-import ExCard from './ExCard.jsx'
+
+import ExCard from './ExCard.js'
 
 function Experiences() {
     return (

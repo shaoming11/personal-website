@@ -1,4 +1,5 @@
-import PCard from './PCard.jsx'
+
+import PCard from './PCard.js'
 
 function Projects() {
     return (

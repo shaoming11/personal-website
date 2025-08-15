@@ -1,23 +1,24 @@
+import { NavLink, Link } from "react-router";
 
 function Header() {
     const navItemClasses = "inline mx-2.5";
-    const navLinkClasses = "no-underline text-black hover:font-bold";
+    const navLinkClasses = "no-underline hover:font-bold";
 
     return(
         <header>
             <nav>
                 <ul className="list-none flex justify-center items-center my-5">
                     <li className={navItemClasses}>
-                        <a href="#" className={navLinkClasses}>Home</a>
+                        <Link to="/" className={navLinkClasses}>Home</Link>
                     </li>
                     <li className={navItemClasses}>
-                        <a href="#about" className={navLinkClasses}>About</a>
+                        <Link to="/about" className={navLinkClasses}>About</Link>
                     </li>
                     <li className={navItemClasses}>
-                        <a href="#experiences" className={navLinkClasses}>Experiences</a>
+                        <Link to="/experiences" className={navLinkClasses}>Experiences</Link>
                     </li>
                     <li className={navItemClasses}>
-                        <a href="#projects" className={navLinkClasses}>Projects</a>
+                        <Link to="/projects" className={navLinkClasses}>Projects</Link>
                     </li>
                 </ul>
             </nav>
