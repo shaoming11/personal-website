@@ -1,8 +1,8 @@
 import Header from "@/components/Header"
 import ProjCardPage from "./ProjCardPage";
-import NetworkImg from "@/assets/redemption.jpeg"
-import SupplyImg from "@/assets/discobots.jpg"
-import ShaolibImg from "@/assets/robotics.jpg"
+import NetworkImg from "@/assets/network.png"
+import SupplyImg from "@/assets/supply.png"
+import ShaolibImg from "@/assets/shaolib.png"
 import { useState } from "react";
 
 function ProjPage() {
