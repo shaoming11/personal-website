@@ -131,3 +131,57 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .backdrop-blur-29 {
+    backdrop-filter: blur(29px);
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(29px) saturate(100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .folder-gradient {
+    background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
+  }
+  
+  .project-card-shadow {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+  
+  .glow-effect {
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.3);
+  }
+  
+  .hover-scale {
+    transition: transform 0.3s ease;
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.02);
+  }
+}

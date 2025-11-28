@@ -83,22 +83,22 @@ const Hero = () => {
               </Button>
             </motion.div>
           </motion.div>
-        </motion.div>
 
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.0 }}
-        >
-          <motion.a
-            href="#about"
-            className="text-muted-foreground hover:text-foreground transition-colors block p-2"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+          <motion.div
+            className="mt-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.0 }}
           >
-            <ArrowDown size={24} />
-          </motion.a>
+            <motion.a
+              href="#about"
+              className="text-muted-foreground hover:text-foreground transition-colors block p-2 mx-auto w-fit"
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <ArrowDown size={24} />
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -10,7 +10,7 @@ const projects = [
   {
     title: "helpidontknowhowtonetworkin.tech",
     description: "A comprehensive networking platform designed to help developers and tech professionals build meaningful connections. Features include skill matching, event discovery, and mentorship programs.",
-    image: "/api/placeholder/600/400",
+    image: "/help.png",
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL", "NextAuth.js"],
     features: [
       "User matching algorithm",
@@ -25,8 +25,8 @@ const projects = [
   {
     title: "SupplyMe",
     description: "An innovative supply chain management platform that streamlines inventory tracking, supplier management, and order processing for small to medium businesses.",
-    image: "/api/placeholder/600/400",
-    tech: ["React", "Node.js", "Express", "MongoDB", "Socket.io", "Chart.js"],
+    image: "/supply.png",
+    tech: ["React", "Node.js", "Express", "MongoDB"],
     features: [
       "Real-time inventory tracking",
       "Automated reorder alerts",
@@ -78,9 +78,17 @@ const Projects = () => {
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="aspect-video bg-gradient-to-br from-blue-900 to-purple-900 rounded-2xl flex items-center justify-center">
-                    <Globe size={64} className="text-blue-400 opacity-50" />
-                  </div>
+                  {project.image && project.image !== "@" ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="aspect-video w-full object-cover rounded-2xl"
+                    />
+                  ) : (
+                    <div className="aspect-video bg-gradient-to-br from-blue-900 to-purple-900 rounded-2xl flex items-center justify-center">
+                      <Globe size={64} className="text-blue-400 opacity-50" />
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="flex gap-4">
                       {project.liveUrl !== "#" && (
