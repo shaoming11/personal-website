@@ -19,7 +19,7 @@ const projects = [
       "Mentorship matching"
     ],
     liveUrl: "https://helpidontknowhowtonetworkin.tech",
-    githubUrl: "#",
+    githubUrl: "https://github.com/naman-sonawane/helpidontknowhowtonetworkintech",
     featured: true
   },
   {
@@ -34,7 +34,7 @@ const projects = [
       "Multi-location support"
     ],
     liveUrl: "#",
-    githubUrl: "#",
+    githubUrl: "https://github.com/shaoming11/supplyme-server",
     featured: true
   }
 ];

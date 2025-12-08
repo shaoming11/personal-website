@@ -30,13 +30,13 @@ const Contact = () => {
     // For now, we'll just create a mailto link
     const subject = `Portfolio Contact from ${formData.name}`;
     const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
-    window.location.href = `mailto:your-email@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:shaoming.wu@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   const socialLinks = [
     {
       name: "Email",
-      href: "mailto:your-email@example.com",
+      href: "mailto:shaoming.wu@outlook.com",
       icon: <Mail className="w-6 h-6" />,
       description: "Send me an email"
     },
@@ -48,7 +48,7 @@ const Contact = () => {
     },
     {
       name: "GitHub",
-      href: "https://github.com/shaoming-wu",
+      href: "https://github.com/shaoming11",
       icon: <Github className="w-6 h-6" />,
       description: "Check out my code"
     }
