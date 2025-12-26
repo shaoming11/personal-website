@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 const Nav = () => {
     const bubbleClass = "outline-solid rounded-4xl bg-white/7 shadow-black backdrop-blur-xs";
-    const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "dark");
+    const [theme, setTheme] = useState(typeof window !== 'undefined' ? (localStorage.getItem("theme") ? localStorage.getItem("theme") : "dark") : "dark");
 
     useEffect(() => {
         if (theme == "dark") {
@@ -25,8 +25,8 @@ const Nav = () => {
             <div className="my-auto">shaomingwu.com</div> {/* SHAOMINGWU.com */}
                 <div className="m-auto">
                 <div className={`m-auto p-4 ${bubbleClass}`}> {/* ABOUT PROJECTS */}
-                    <Link className="m-4" href={'/'}>about</Link>
-                    <Link className="m-4" href={'/projects'}>projects</Link>
+                    <Link className="m-4 light:hover:text-gray-700 dark:hover:text-gray-300" href={'/'}>about</Link>
+                    <Link className="m-4 light:hover:text-gray-700 dark:hover:text-gray-300" href={'/projects'}>projects</Link>
                 </div>
             </div>
             <div className="block">

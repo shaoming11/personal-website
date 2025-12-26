@@ -51,7 +51,7 @@ const Hero = () => {
               <a className={iconClass} href="https://github.com/shaoming11" target="_blank"><FiGithub size={"1.2em"}/></a> 
               <a className={iconClass} href="mailto:smwu007@gmail.com" target="_blank"><MdOutlineMail size={"1.2em"}/></a>
             </div>
-            <div className={`${bubbleClass} m-auto py-4 px-10 col-span-2`}><a href="resume.pdf" target="_blank">resume</a></div> {/* RESUME */}
+            <div className={`${bubbleClass} m-auto py-4 px-10 col-span-2`}><a href="resume.pdf" className="light:hover:text-gray-700 dark:hover:text-gray-300" target="_blank">resume</a></div> {/* RESUME */}
           </div>
         </div>
       </div>
