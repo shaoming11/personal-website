@@ -2,106 +2,56 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown, Download, Mail } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { FaLinkedinIn } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FiGithub } from "react-icons/fi";
+import { MdOutlineMail, MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
+import Nav from "@/components/Nav"
 
+/**
+ * The Hero component is the main component of the landing page.
+ * It contains animated background patterns, a title, a subtitle, and a call-to-action button.
+ * The title and subtitle are animated to fade in and scale up, while the call-to-action button is animated to bounce up and down.
+ * The background patterns are animated to move in a random direction with a random duration and delay.
+ * The Hero component is responsive and works well on both desktop and mobile devices.
+ */
 const Hero = () => {
+  const bubbleClass = "outline-solid rounded-4xl bg-white/7 shadow-black backdrop-blur-xs";
+  const iconClass = "m-auto"
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-muted">
-      {/* Animated background patterns */}
-      <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-primary/20 rounded-full"
-            initial={{
-              x: Math.random() * 1000,
-              y: Math.random() * 1000,
-              opacity: 0,
-            }}
-            animate={{
-              y: -100,
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: Math.random() * 3 + 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
+    <div className="min-w-screen">
+      <div className="min-h-screen relative m-auto w-5xl">
+        <Nav />
+        <div className="w-2xl m-auto my-10"> {/* Main Section */}
+          <div className="grid grid-cols-3">
+            <img src={"shaoming.png"} className="col-span-1 m-4 p-6"/>
+            <div className="pt-20 col-span-2 m-4 pr-5 "><b>Hey, I'm Shaoming!</b><br/><p className="dark:text-gray-300 light:text-gray-600">I'm a student at Milliken Mills High School, with a passion in the crossover and intersection between volleyball, robotics, and cello.</p></div>
+          </div>
+          <div className="pb-4 px-4 w-xl m-auto text-base/relaxed"> {/* CURRENTLY DOING: */}
+            <p>currently doing:
+            <br/>- <b>Engineering @ VEX Robotics</b>
+            <br/>- <b>Outreach @ Hack Canada</b></p>
+          </div>
+          <div className="p-4 w-xl m-auto text-base/relaxed"> {/* WHAT I'VE BUILT */}
+            <p>what i've built: <br/>
+            - <a href="https://github.com/naman-sonawane/helpidontknowhowtonetworkintech">help...network.tech</a> | networking tool for CS students <br/>
+            - <a href="https://github.com/shaoming11/supplyme-client">SupplyMe</a> | helping businesses locate suppliers <br/>
+            - <a href="https://github.com/shaoming11/shao-lib">shao-lib</a> | custom motion algorithm library for robotics <br/></p>
+          </div>
+
+          <div className="grid grid-cols-5 p-4 w-lg mx-auto my-10">{ /* Additional Info */}
+            <div className={`grid grid-cols-4 col-span-3 p-4 ${bubbleClass}`}> {/* CONTACTS */}
+              <a className={iconClass} href="https://www.linkedin.com/in/shaoming-wu/" target="_blank"><FaLinkedinIn size={"1.2em"}/></a> 
+              <a className={iconClass} href="https://x.com/shaomng" target="_blank"><FaXTwitter size={"1.2em"}/></a> 
+              <a className={iconClass} href="https://github.com/shaoming11" target="_blank"><FiGithub size={"1.2em"}/></a> 
+              <a className={iconClass} href="mailto:smwu007@gmail.com" target="_blank"><MdOutlineMail size={"1.2em"}/></a>
+            </div>
+            <div className={`${bubbleClass} m-auto py-4 px-10 col-span-2`}><a href="resume.pdf" target="_blank">resume</a></div> {/* RESUME */}
+          </div>
+        </div>
       </div>
-
-      <div className="container mx-auto px-6 text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto space-y-8"
-        >
-          <motion.h1
-            className="text-5xl md:text-7xl font-bold text-gradient"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Shaoming Wu
-          </motion.h1>
-
-          <motion.p
-            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            Robotics Leader & Fullstack Developer
-            <br />
-            <span className="text-primary font-semibold">
-              Building the future through code and innovation
-            </span>
-          </motion.p>
-
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button asChild size="lg" className="text-lg">
-                <a href="#contact">
-                  <Mail className="w-5 h-5 mr-2" />
-                  Get In Touch
-                </a>
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button asChild variant="outline" size="lg" className="text-lg">
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-                  <Download className="w-5 h-5 mr-2" />
-                  Download Resume
-                </a>
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            className="mt-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.0 }}
-          >
-            <motion.a
-              href="#about"
-              className="text-muted-foreground hover:text-foreground transition-colors block p-2 mx-auto w-fit"
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <ArrowDown size={24} />
-            </motion.a>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
+    </div>
   );
 };
 
