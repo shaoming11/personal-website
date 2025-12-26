@@ -8,18 +8,20 @@ import { useState, useEffect } from "react";
 
 const Nav = () => {
     const bubbleClass = "outline-solid rounded-4xl bg-white/7 shadow-black backdrop-blur-xs";
-    const [theme, setTheme] = useState("dark");
+    const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "dark");
 
     useEffect(() => {
         if (theme == "dark") {
             document.documentElement.className = theme;
+            localStorage.setItem("theme", "dark")
         } else if (theme == "light") {
             document.documentElement.className = theme;
+            localStorage.setItem("theme", "light")
         }
     }, [theme]);
 
     return (
-        <div className="grid grid-cols-[100px_1fr_100px] mt-12"> {/* Nav Section */}
+        <div className="grid grid-cols-[100px_1fr_100px] pt-12"> {/* Nav Section */}
             <div className="my-auto">shaomingwu.com</div> {/* SHAOMINGWU.com */}
                 <div className="m-auto">
                 <div className={`m-auto p-4 ${bubbleClass}`}> {/* ABOUT PROJECTS */}

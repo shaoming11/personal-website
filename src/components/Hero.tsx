@@ -26,18 +26,22 @@ const Hero = () => {
         <div className="w-2xl m-auto my-10"> {/* Main Section */}
           <div className="grid grid-cols-3">
             <img src={"shaoming.png"} className="col-span-1 m-4 p-6"/>
-            <div className="pt-20 col-span-2 m-4 pr-5 "><b>Hey, I'm Shaoming!</b><br/><p className="dark:text-gray-300 light:text-gray-600">I'm a student at Milliken Mills High School, with a passion in the crossover and intersection between volleyball, robotics, and cello.</p></div>
+            <div className="pt-20 col-span-2 m-4 pr-5 "><b>Hey, I'm Shaoming!</b><br/><p className="dark:text-gray-300 light:text-gray-600">I'm a student at Milliken Mills High School, with a passion in the <a href="https://www.youtube.com/watch?v=g-mZWWTirZE&t=53s" className="hover:cursor-default" target="_blank">crossover and intersection</a> between volleyball 🏐, robotics 🤖, and cello 🎻.</p></div>
           </div>
-          <div className="pb-4 px-4 w-xl m-auto text-base/relaxed"> {/* CURRENTLY DOING: */}
-            <p>currently doing:
-            <br/>- <b>Engineering @ VEX Robotics</b>
-            <br/>- <b>Outreach @ Hack Canada</b></p>
+          <div className="pb-4 px-4 w-xl m-auto text-base/relaxed"> {/* EXPERIENCES LIST: */}
+            <p>currently doing:</p>
+            <ul className="list-disc pl-4 hover:pl-6">
+              <li className="hover:underline hover:cursor-pointer"><b><a href="https://www.vexrobotics.com/" target="_blank">Engineering @ VEX Robotics</a></b></li>
+              <li className="hover:underline hover:cursor-pointer"><b><a href="https://www.hackcanada.org/" target="_blank">Outreach @ Hack Canada</a></b></li>
+            </ul>
           </div>
-          <div className="p-4 w-xl m-auto text-base/relaxed"> {/* WHAT I'VE BUILT */}
-            <p>what i've built: <br/>
-            - <a href="https://github.com/naman-sonawane/helpidontknowhowtonetworkintech">help...network.tech</a> | networking tool for CS students <br/>
-            - <a href="https://github.com/shaoming11/supplyme-client">SupplyMe</a> | helping businesses locate suppliers <br/>
-            - <a href="https://github.com/shaoming11/shao-lib">shao-lib</a> | custom motion algorithm library for robotics <br/></p>
+          <div className="p-4 w-xl m-auto text-base/relaxed"> {/* PROJECTS LIST */}
+            <p>what i've built:</p>
+            <ul className="list-disc pl-4 hover:pl-6">
+              <li><a className='hover:underline' href="https://github.com/naman-sonawane/helpidontknowhowtonetworkintech" target="_blank">help...network.tech</a> | networking tool for CS students <br/></li>
+              <li><a className='hover:underline' href="https://github.com/shaoming11/supplyme-client" target="_blank">SupplyMe</a> | helping businesses locate suppliers <br/></li>
+              <li><a className='hover:underline' href="https://github.com/shaoming11/shao-lib" target="_blank">shao-lib</a> | custom motion algorithm library for robotics <br/></li>
+            </ul>
           </div>
 
           <div className="grid grid-cols-5 p-4 w-lg mx-auto my-10">{ /* Additional Info */}
