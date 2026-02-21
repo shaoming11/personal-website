@@ -26,7 +26,7 @@ const Hero = () => {
         <div className="w-2xl m-auto my-10"> {/* Main Section */}
           <div className="grid grid-cols-3">
             <img src={"shaoming.png"} className="col-span-1 m-4 p-6"/>
-            <div className="pt-20 col-span-2 m-4 pr-5 "><b>Hey, I'm Shaoming!</b><br/><p className="dark:text-gray-300 light:text-gray-600">I'm a student at Milliken Mills High School, with a passion in the <a href="https://www.youtube.com/watch?v=g-mZWWTirZE&t=53s" className="hover:cursor-default" target="_blank">crossover and intersection</a> between volleyball 🏐, robotics 🤖, and cello 🎻.</p></div>
+            <div className="pt-20 col-span-2 m-4 pr-5 "><b>Hey, I'm Shaoming!</b><br/><p className="dark:text-gray-300 light:text-gray-600">I'm a student at Milliken Mills High School, with a passion in the <a href="https://www.youtube.com/watch?v=g-mZWWTirZE&t=53s" className="hover:cursor-default" target="_blank">crossover and intersection</a> between environmentalism, social justice, and robotics.</p></div>
           </div>
           <div className="pb-4 px-4 w-xl m-auto text-base/relaxed"> {/* EXPERIENCES LIST: */}
             <p>currently doing:</p>
