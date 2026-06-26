@@ -89,8 +89,8 @@ export const work: WorkItem[] = [
 
 export const coolThings: { text: string; highlight?: string; color?: string }[] = [
   {
-    text: "architected an autonomous drone cinematography pipeline across ",
-    highlight: "40+ python modules",
+    text: "architected an autonomous drone cinematography pipeline with ",
+    highlight: "5 stages",
     color: "bg-blue-100 dark:bg-blue-500/20",
   },
   {
@@ -99,24 +99,19 @@ export const coolThings: { text: string; highlight?: string; color?: string }[] 
     color: "bg-green-100 dark:bg-green-500/20",
   },
   {
-    text: "co-founded ",
-    highlight: "Altura Robotics",
+    text: "organized a hackathon for ",
+    highlight: "700+ participants",
     color: "bg-amber-100 dark:bg-amber-500/20",
   },
   {
-    text: "led my team to ",
+    text: "qualified 4 times to ",
     highlight: "VEX Worlds",
     color: "bg-rose-100 dark:bg-rose-500/20",
   },
   {
-    text: "introduced ",
+    text: "introduced engineering principles to ",
     highlight: "10,000+ students",
     color: "bg-indigo-100 dark:bg-indigo-500/20",
-  },
-  {
-    text: "research assistant at ",
-    highlight: "UofT",
-    color: "bg-violet-100 dark:bg-violet-500/20",
   },
 ]
 
