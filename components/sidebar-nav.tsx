@@ -1,6 +1,6 @@
 "use client"
 
-import { navItems } from "@/lib/portfolio-data"
+import { navItems } from "@/lib/data"
 
 export function SidebarNav() {
   function handleClick(id: string) {

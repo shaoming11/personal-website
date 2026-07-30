@@ -14,36 +14,14 @@ export type WorkItem = {
 
 export const work: WorkItem[] = [
   {
-    id: "dm5",
-    title: "DM5",
+    id: "swing",
+    title: "Swing",
     category: "project",
     label: "project",
     date: "2026",
-    image: "/projects/dm6.png",
+    image: "/projects/swing.png",
     description:
-      "Agentic orchestration pipeline for product managers",
-    filter: "Projects",
-  },
-  {
-    id: "millikepedia",
-    title: "millikepedia",
-    category: "project",
-    label: "project",
-    date: "2026",
-    image: "/projects/millikeepedia.png",
-    description:
-      "Knowledge graph built for multidisciplinary learners",
-    filter: "Projects",
-  },
-  {
-    id: "fraudgen",
-    title: "FraudGen",
-    category: "project",
-    label: "project",
-    date: "2026",
-    image: "/projects/fraudgen.png",
-    description:
-      "Synthetic data generation for machine learning in finance",
+      "Self-improving agent trained on the stock market",
     filter: "Projects",
   },
   {
@@ -58,6 +36,17 @@ export const work: WorkItem[] = [
     filter: "Projects",
   },
   {
+    id: "dm5",
+    title: "DM5",
+    category: "project",
+    label: "project",
+    date: "2026",
+    image: "/projects/dm6.png",
+    description:
+      "Agentic orchestration pipeline for product managers",
+    filter: "Projects",
+  },
+  {
     id: "pral",
     title: "PRAL",
     category: "project",
@@ -69,14 +58,36 @@ export const work: WorkItem[] = [
     filter: "Projects",
   },
   {
-    id: "swing",
-    title: "Swing",
+    id: "fraudgen",
+    title: "FraudGen",
     category: "project",
     label: "project",
     date: "2026",
-    image: "/projects/swing.png",
+    image: "/projects/fraudgen.png",
     description:
-      "Self-improving agent trained on the stock market",
+      "Synthetic data generation for machine learning in finance",
+    filter: "Projects",
+  },
+  {
+    id: "millikepedia",
+    title: "millikepedia",
+    category: "project",
+    label: "project",
+    date: "2026",
+    image: "/projects/millikeepedia.png",
+    description:
+      "Knowledge graph built for multidisciplinary learners",
+    filter: "Projects",
+  },
+  {
+    id: "outreach",
+    title: "Outreach",
+    category: "project",
+    label: "project",
+    date: "2026",
+    image: "/projects/hc-outreach.png",
+    description:
+      "Agentic outreach pipeline + CRM for securing sponsorships",
     filter: "Projects",
   },
   {

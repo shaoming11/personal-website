@@ -3,7 +3,7 @@
 import { Mail, Moon, Sun } from "lucide-react"
 import type { SVGProps } from "react"
 import { useEffect, useState } from "react"
-import { coolThings } from "@/lib/portfolio-data"
+import { coolThings } from "@/lib/data"
 
 function GithubIcon(props: SVGProps<SVGSVGElement>) {
   return (

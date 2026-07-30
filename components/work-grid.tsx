@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { work, type WorkItem } from "@/lib/portfolio-data"
+import { work, type WorkItem } from "@/lib/data"
 
 export function WorkGrid() {
   return (

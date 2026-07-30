@@ -1,4 +1,4 @@
-import { awards } from "@/lib/portfolio-data"
+import { awards } from "@/lib/data"
 
 const community = [
   {

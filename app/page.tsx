@@ -1,8 +1,8 @@
 "use client"
 
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
-import { work } from "@/lib/portfolio-data"
+import { useState } from "react"
+import { work, bioItems, socials, navItems, blogPosts, type BioSegment } from "@/lib/data"
 
 const linkColors = [
   "bg-blue-400/30",
@@ -13,61 +13,6 @@ const linkColors = [
   "bg-cyan-400/30",
   "bg-pink-400/30",
   "bg-orange-400/30",
-]
-
-type BioSegment = { text: string } | { link: string; href: string; icon?: string }
-
-const bioItems: BioSegment[][] = [
-  [
-    { text: "incoming mechatronics engineering @ " },
-    { link: "UWaterloo", href: "https://uwaterloo.ca", icon: "/icons/icon_uw.png" },
-  ],
-  [
-    { text: "doing research on " },
-    { link: "reinforcement learning", href: "#" },
-  ],
-  [
-    { text: "building a self-driving car @ " },
-    { link: "WATonomous", href: "https://watonomous.ca", icon: "/icons/icon_wato.jpeg" },
-  ],
-  [
-    { text: "open-source CV @ " },
-    { link: "Roboflow", href: "https://roboflow.com", icon: "/icons/icon_rb.webp" },
-  ],
-  [
-    { text: "building tactile data for " },
-    { link: "humanoids", href: "#" },
-  ],
-  [
-    { text: "organizing toronto's largest " },
-    { link: "summer hackathon", href: "https://hackthe6ix.com", icon: "/icons/icon_ht6.jpeg" },
-    { text: " (400+ participants)" },
-  ],
-  [
-    { text: "previously organized " },
-    { link: "Hack Canada", href: "https://hackcanada.org", icon: "/icons/icon_hc.png" },
-    { text: " (700+ participants)" },
-  ],
-]
-
-const socials = [
-  { label: "linkedin", href: "https://linkedin.com/in/shaoming-wu" },
-  { label: "x", href: "https://x.com" },
-  { label: "github", href: "https://github.com/shaoming11" },
-]
-
-const navItems = [
-  { id: "about", label: "about" },
-  { id: "projects", label: "projects" },
-  { id: "writing", label: "writing" },
-]
-
-const blogPosts = [
-  { title: "blog #1", date: "march 17, 2026" },
-  { title: "blog #1", date: "march 17, 2026" },
-  { title: "blog #1", date: "march 17, 2026" },
-  { title: "blog #1", date: "march 17, 2026" },
-  { title: "blog #1", date: "march 17, 2026" },
 ]
 
 function handleNav(id: string) {
@@ -101,95 +46,41 @@ function AnimatedLink({ href, children, colorClass, icon }: { href: string; chil
 }
 
 function SideNav() {
-  const [inAbout, setInAbout] = useState(true)
-  const [manualHover, setManualHover] = useState(false)
   const [hovered, setHovered] = useState<string | null>(null)
 
-  useEffect(() => {
-    const aboutEl = document.getElementById("about")
-    if (!aboutEl) return
-    const observer = new IntersectionObserver(
-      ([entry]) => setInAbout(entry.isIntersecting),
-      { rootMargin: "0px 0px -50% 0px", threshold: 0 }
-    )
-    observer.observe(aboutEl)
-    return () => observer.disconnect()
-  }, [])
-
-  const expanded = inAbout || manualHover
-  const [ready, setReady] = useState(false)
-
-  useEffect(() => {
-    if (expanded) {
-      const timer = setTimeout(() => setReady(true), 500)
-      return () => clearTimeout(timer)
-    }
-    setReady(false)
-  }, [expanded])
-
   return (
-    <>
-      {/* Hover trigger zone — always present on right edge */}
-      <div
-        className="fixed right-0 top-0 z-9999 hidden h-screen w-48 sm:block"
-        onMouseEnter={() => setManualHover(true)}
-        onMouseLeave={() => { setManualHover(false); setHovered(null) }}
-      />
-
-      {/* Nav container — top-right, aligned with heading */}
-      <div
-        className="fixed z-9999 hidden sm:block"
-        style={{
-          top: "4rem",
-          left: "min(calc(100% - 1.5rem), calc(50% + 24rem - 1.5rem))",
-          pointerEvents: expanded ? "auto" : "none",
-          fontFamily: "var(--font-onest)",
-        }}
-        onMouseEnter={() => setManualHover(true)}
-        onMouseLeave={() => { setManualHover(false); setHovered(null) }}
-      >
-        {/* Gradient backdrop */}
-        <div
-          className="absolute right-[-50vw] transition-opacity duration-500 ease-out"
-          style={{
-            top: "-4rem",
-            bottom: "-100vh",
-            left: "-16rem",
-            opacity: expanded ? 1 : 0,
-            background: "linear-gradient(to right, transparent, var(--background) 40%)",
-            pointerEvents: "none",
-          }}
-        />
-
-        {/* Nav labels */}
-        <div className="relative flex flex-col items-start gap-1">
-          {navItems.map((item) => {
-            const isHovered = ready && hovered === item.id
-            return (
-              <button
-                key={item.id}
-                onClick={() => handleNav(item.id)}
-                onMouseEnter={() => ready && setHovered(item.id)}
-                onMouseLeave={() => setHovered(null)}
-                className="whitespace-nowrap text-left text-muted-foreground"
-                style={{
-                  transition: "transform 500ms ease-out, opacity 500ms ease-out, font-size 300ms ease-out, font-weight 300ms ease-out, color 300ms ease-out",
-                  transform: expanded ? "translateX(0)" : "translateX(calc(100% + 4rem))",
-                  opacity: expanded ? 1 : 0,
-                  color: isHovered ? "var(--foreground)" : undefined,
-                  fontSize: isHovered ? "2.5rem" : "1rem",
-                  fontWeight: isHovered ? 700 : 400,
-                  lineHeight: 1.8,
-                  pointerEvents: expanded ? "auto" : "none",
-                }}
-              >
-                {item.label}
-              </button>
-            )
-          })}
-        </div>
+    <div
+      className="fixed z-9999 hidden sm:block"
+      style={{
+        top: "4rem",
+        left: "min(calc(100% - 1rem), calc(50% + 26rem))",
+        fontFamily: "var(--font-onest)",
+      }}
+    >
+      <div className="flex flex-col items-start gap-1">
+        {navItems.map((item) => {
+          const isHovered = hovered === item.id
+          return (
+            <button
+              key={item.id}
+              onClick={() => handleNav(item.id)}
+              onMouseEnter={() => setHovered(item.id)}
+              onMouseLeave={() => setHovered(null)}
+              className="whitespace-nowrap text-left text-muted-foreground"
+              style={{
+                transition: "font-size 300ms ease-out, font-weight 300ms ease-out, color 300ms ease-out",
+                color: isHovered ? "var(--foreground)" : undefined,
+                fontSize: isHovered ? "2.5rem" : "1rem",
+                fontWeight: isHovered ? 700 : 400,
+                lineHeight: 1.8,
+              }}
+            >
+              {item.label}
+            </button>
+          )
+        })}
       </div>
-    </>
+    </div>
   )
 }
 
