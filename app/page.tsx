@@ -143,6 +143,7 @@ function SideNav() {
           top: "4rem",
           left: "min(calc(100% - 1.5rem), calc(50% + 24rem - 1.5rem))",
           pointerEvents: expanded ? "auto" : "none",
+          fontFamily: "var(--font-onest)",
         }}
         onMouseEnter={() => setManualHover(true)}
         onMouseLeave={() => { setManualHover(false); setHovered(null) }}
@@ -217,29 +218,38 @@ function BioLine({ segments }: { segments: BioSegment[] }) {
 export default function Page() {
   linkColorIndex = 0
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16 font-mono">
+    <main className="mx-auto max-w-3xl px-6 py-16" style={{ fontFamily: "var(--font-onest)" }}>
       {/* Fixed side nav */}
       <SideNav />
 
       {/* Header section */}
       <section id="about" className="relative">
-        <h1 className="font-bold tracking-tight" style={{ fontSize: "clamp(2.25rem, 5vw, 3.4375rem)" }}>shaoming wu</h1>
+        <h1
+          className="tracking-tight"
+          style={{
+            fontSize: "clamp(3rem, 7vw, 5rem)",
+            fontFamily: "var(--font-onest)",
+            fontWeight: 400,
+          }}
+        >
+          shaoming wu
+        </h1>
 
-        <ul className="mt-8 space-y-1" style={{ fontSize: "19px" }}>
+        <ul className="mt-6 space-y-1.5" style={{ fontSize: "18px" }}>
           {bioItems.map((segments, i) => (
             <BioLine key={i} segments={segments} />
           ))}
         </ul>
 
         {/* Social links */}
-        <div className="mt-40 flex items-center justify-center gap-6" style={{ fontSize: "19px" }}>
+        <div className="mt-12 flex items-center gap-3">
           {socials.map((s) => (
             <a
               key={s.label}
               href={s.href}
               target="_blank"
               rel="noreferrer noopener"
-              className="underline decoration-muted-foreground/50 underline-offset-4 transition-[text-decoration-color] duration-300 hover:decoration-foreground"
+              className="bg-foreground text-background px-4 py-1.5 text-sm font-medium hover:opacity-80 transition-opacity"
             >
               {s.label}
             </a>
@@ -247,33 +257,30 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Projects section – full-bleed cards */}
+      {/* Projects section */}
       <section id="projects" className="mt-16">
         <h2 className="font-bold" style={{ fontSize: "25px" }}>projects</h2>
-      </section>
-      <section
-        className="relative mt-8"
-        style={{
-          width: "calc(100vw - 3rem)",
-          marginLeft: "calc(-50vw + 50% + 1.5rem)",
-        }}
-      >
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
           {work.map((item) => (
-            <article key={item.id} className="group relative overflow-hidden rounded-lg">
-              <Image
-                src={item.image || "/placeholder.svg"}
-                alt={`${item.title} preview`}
-                width={800}
-                height={500}
-                className="aspect-4/3 w-full object-cover brightness-[0.85] transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/80 via-black/40 to-transparent p-4 pt-16">
-                <h3 className="text-lg font-bold text-white">
-                  {item.title} <span className="font-normal text-white/70">— {item.date}</span>
-                </h3>
-                <p className="mt-0.5 text-xs leading-relaxed text-white/70">{item.description}</p>
+            <article key={item.id} className="group">
+              <div className="overflow-hidden">
+                <Image
+                  src={item.image || "/placeholder.svg"}
+                  alt={`${item.title} preview`}
+                  width={800}
+                  height={500}
+                  className="aspect-4/3 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
+              <div className="mt-0 flex items-center justify-between bg-foreground px-3 py-1.5">
+                <h3 className="text-sm font-bold text-background">{item.title}</h3>
+                <span className="text-sm text-background">{item.date}</span>
+              </div>
+              <p className="mt-1 flex gap-1.5 text-xs text-muted-foreground">
+                <span className="select-none">‣</span>
+                {item.description}
+              </p>
             </article>
           ))}
         </div>

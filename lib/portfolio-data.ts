@@ -14,39 +14,14 @@ export type WorkItem = {
 
 export const work: WorkItem[] = [
   {
-    id: "pral-drone",
-    title: "PRAL Drone Systems",
+    id: "dm5",
+    title: "DM5",
     category: "project",
     label: "project",
-    date: "Jun 2026",
-    image: "/projects/pral-drone.png",
-    stack: "Python, Next.js, React, TypeScript, three.js",
+    date: "2026",
+    image: "/projects/dm6.png",
     description:
-      "an autonomous drone cinematography pipeline spanning 5 sequential stages over 40+ python modules — target confirmation, 3D reconstruction, and shot generation through a fully mocked hardware layer for 100% hardware-free testing.",
-    filter: "Projects",
-  },
-  {
-    id: "fraudgen",
-    title: "FraudGen",
-    category: "project",
-    label: "project",
-    date: "Mar 2026",
-    image: "/projects/fraudgen.png",
-    stack: "Python, Anthropic API, Streamlit, FastAPI, Next.js",
-    description:
-      "a multi-agent adversarial simulation pipeline that synthesizes structurally diverse fraud transaction networks, closing a 20–100x labeled-data gap for GNN-based fraud detection. won 2nd place at BitGo.",
-    filter: "Projects",
-  },
-  {
-    id: "hc-outreach",
-    title: "hc-outreach",
-    category: "project",
-    label: "project",
-    date: "Jun 2026",
-    image: "/projects/hc-outreach.png",
-    stack: "Python, Anthropic API, Gmail API, Apollo API",
-    description:
-      "a multi-agent LLM system automating sponsor outreach for a 700+ attendee hackathon across a generate → research → draft → send pipeline, eliminating ~90% of manual prospecting work.",
+      "Agentic orchestration pipeline for product managers",
     filter: "Projects",
   },
   {
@@ -54,36 +29,66 @@ export const work: WorkItem[] = [
     title: "millikepedia",
     category: "project",
     label: "project",
-    date: "Apr 2026",
-    image: "/projects/millikepedia.png",
-    stack: "Next.js, Supabase, React Flow, WebSockets",
+    date: "2026",
+    image: "/projects/millikeepedia.png",
     description:
-      "a full-stack knowledge platform for student clubs with real-time collaborative drawing, a 5-layer mind map connecting 100+ concepts, and a 4-tier access system with git-style edit history.",
+      "Knowledge graph built for multidisciplinary learners",
     filter: "Projects",
   },
   {
-    id: "altura-robotics",
-    title: "Altura Robotics",
-    category: "experience",
-    label: "co-founder",
-    date: "2024 — 2026",
-    image: "/projects/altura-robotics.png",
-    stack: "C++, Fusion 360, PID, Computer Vision",
-    description:
-      "co-founded and led a team of 12. built C++ control software fusing inertial, vision and optical sensors with PID loops, improving autonomous accuracy by 40%. 2x tournament champion + VEX Worlds qualifier.",
-    filter: "Experience",
-  },
-  {
-    id: "supplyme",
-    title: "SupplyMe",
+    id: "fraudgen",
+    title: "FraudGen",
     category: "project",
     label: "project",
-    date: "May 2025",
-    image: "/projects/supplyme.png",
-    stack: "Django REST, Flutter, MongoDB Atlas",
+    date: "2026",
+    image: "/projects/fraudgen.png",
     description:
-      "a django REST API leveraging MongoDB Atlas semantic search and Gemini AI for inventory queries with 90% accuracy, paired with a cross-platform flutter mobile frontend.",
+      "Synthetic data generation for machine learning in finance",
     filter: "Projects",
+  },
+  {
+    id: "hand-cv",
+    title: "Hand CV",
+    category: "project",
+    label: "project",
+    date: "2026",
+    image: "/projects/hand.png",
+    description:
+      "CV model trained on hand gestures for humanoids",
+    filter: "Projects",
+  },
+  {
+    id: "pral",
+    title: "PRAL",
+    category: "project",
+    label: "project",
+    date: "2026",
+    image: "/projects/pral.png",
+    description:
+      "Autonomous drone flight planner for cinematography",
+    filter: "Projects",
+  },
+  {
+    id: "swing",
+    title: "Swing",
+    category: "project",
+    label: "project",
+    date: "2026",
+    image: "/projects/swing.png",
+    description:
+      "Self-improving agent trained on the stock market",
+    filter: "Projects",
+  },
+  {
+    id: "vex-robotics",
+    title: "VEX Robotics",
+    category: "experience",
+    label: "co-founder",
+    date: "2025",
+    image: "/projects/VEX.png",
+    description:
+      "Robots built on the VEX V5 ecosystem for competitive robotics",
+    filter: "Experience",
   },
 ]
 

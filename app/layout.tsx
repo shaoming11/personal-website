@@ -1,11 +1,17 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Onest, Averia_Gruesa_Libre } from 'next/font/google'
 import './globals.css'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
+  subsets: ['latin'],
+})
+const onest = Onest({ variable: '--font-onest', subsets: ['latin'] })
+const averiaGruesaLibre = Averia_Gruesa_Libre({
+  variable: '--font-averia',
+  weight: '400',
   subsets: ['latin'],
 })
 
@@ -46,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-background`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${onest.variable} ${averiaGruesaLibre.variable} bg-background`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `
           (function() {
