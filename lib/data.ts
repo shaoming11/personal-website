@@ -14,6 +14,9 @@ export type WorkItem = {
   stack?: string
   description: string
   filter: "Projects" | "Communities" | "Experience"
+  github?: string
+  demo?: string
+  expand?: string
 }
 
 // ── Bio ──
@@ -86,6 +89,8 @@ export const work: WorkItem[] = [
     description:
       "Self-improving agent trained on the stock market",
     filter: "Projects",
+    github: "https://github.com/shaoming11/swing-trader",
+    expand: "/swing",
   },
   {
     id: "hand-cv",
@@ -97,6 +102,7 @@ export const work: WorkItem[] = [
     description:
       "CV model trained on hand gestures for humanoids",
     filter: "Projects",
+    github: "https://github.com/shaoming11/rb-proj",
   },
   {
     id: "dm5",
@@ -108,6 +114,8 @@ export const work: WorkItem[] = [
     description:
       "Agentic orchestration pipeline for product managers",
     filter: "Projects",
+    github: "https://github.com/PhongCT1105/YC_Hack",
+    demo: "https://research-sprint-phong-caos-projects.vercel.app/dashboard/sp_450d26db474d?key=bee5be1b841fb8fac5a1394e05c92938",
   },
   {
     id: "pral",
@@ -119,6 +127,8 @@ export const work: WorkItem[] = [
     description:
       "Autonomous drone flight planner for cinematography",
     filter: "Projects",
+    github: "https://github.com/101011101/PRAL-Drone-Systems",
+    demo: "https://devpost.com/software/pral",
   },
   {
     id: "fraudgen",
@@ -127,9 +137,12 @@ export const work: WorkItem[] = [
     label: "project",
     date: "2026",
     image: "/projects/fraudgen.png",
+    stack: "ts",
     description:
       "Synthetic data generation for machine learning in finance",
     filter: "Projects",
+    github: "https://github.com/101011101/GenAi",
+    demo: "https://devpost.com/software/fraudsense-3gltkw",
   },
   {
     id: "millikepedia",
@@ -141,6 +154,7 @@ export const work: WorkItem[] = [
     description:
       "Knowledge graph built for multidisciplinary learners",
     filter: "Projects",
+    github: "https://github.com/shaoming11/millikepedia",
   },
   {
     id: "outreach",
@@ -152,6 +166,7 @@ export const work: WorkItem[] = [
     description:
       "Agentic outreach pipeline + CRM for securing sponsorships",
     filter: "Projects",
+    github: "https://github.com/shaoming11/hc-outreach",
   },
   {
     id: "vex-robotics",
@@ -163,6 +178,8 @@ export const work: WorkItem[] = [
     description:
       "Robots built on the VEX V5 ecosystem for competitive robotics",
     filter: "Experience",
+    github: "https://github.com/shaoming11/shao-lib",
+    demo: "https://www.instagram.com/alturafoundation/",
   },
 ]
 
@@ -172,27 +189,27 @@ export const coolThings: { text: string; highlight?: string; color?: string }[] 
   {
     text: "architected an autonomous drone cinematography pipeline with ",
     highlight: "5 stages",
-    color: "bg-blue-100 dark:bg-blue-500/20",
+    color: "bg-[#00ffff]/30 dark:bg-[#00ffff]/25",
   },
   {
     text: "won ",
     highlight: "first place @ JAMHacks 10",
-    color: "bg-green-100 dark:bg-green-500/20",
+    color: "bg-[#39ff14]/30 dark:bg-[#39ff14]/25",
   },
   {
     text: "organized a hackathon for ",
     highlight: "700+ participants",
-    color: "bg-amber-100 dark:bg-amber-500/20",
+    color: "bg-[#ffff00]/30 dark:bg-[#ffff00]/25",
   },
   {
     text: "qualified 4 times to ",
     highlight: "VEX Worlds",
-    color: "bg-rose-100 dark:bg-rose-500/20",
+    color: "bg-[#ff6ec7]/30 dark:bg-[#ff6ec7]/25",
   },
   {
     text: "introduced engineering principles to ",
     highlight: "10,000+ students",
-    color: "bg-indigo-100 dark:bg-indigo-500/20",
+    color: "bg-[#bf00ff]/30 dark:bg-[#bf00ff]/25",
   },
 ]
 
