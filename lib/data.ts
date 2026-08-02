@@ -28,7 +28,7 @@ export const bioItems: BioSegment[][] = [
   ],
   [
     { text: "doing research on " },
-    { link: "reinforcement learning", href: "#" },
+    { link: "world models", href: "#" },
   ],
   [
     { text: "building a self-driving car @ " },
@@ -39,8 +39,8 @@ export const bioItems: BioSegment[][] = [
     { link: "Roboflow", href: "https://roboflow.com", icon: "/icons/icon_rb.webp" },
   ],
   [
-    { text: "building tactile data for " },
-    { link: "humanoids", href: "#" },
+    { text: "building a " },
+    { link: "dexterous hand", href: "https://github.com/shaoming11/rb-proj" },
   ],
   [
     { text: "organizing toronto's largest " },
