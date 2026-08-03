@@ -65,7 +65,7 @@ export default function RootLayout({
           })();
         `}} />
       </head>
-      <body className="font-sans antialiased">
+      <body className="antialiased" style={{ fontFamily: "var(--font-onest)" }}>
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

@@ -58,7 +58,7 @@ export const bioItems: BioSegment[][] = [
 
 export const socials = [
   { label: "linkedin", href: "https://linkedin.com/in/shaoming-wu" },
-  { label: "x", href: "https://x.com/shaomng" },
+  { label: "twitter", href: "https://x.com/shaomng" },
   { label: "github", href: "https://github.com/shaoming11" },
 ]
 

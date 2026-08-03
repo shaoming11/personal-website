@@ -168,4 +168,8 @@
   html {
     @apply font-sans;
   }
+  ::selection {
+    background: #fff000;
+    color: #000;
+  }
 }

@@ -93,7 +93,7 @@ export default function SwingPage() {
 
       {/* Title */}
       <div className="text-center mt-4">
-        <h1 className="text-5xl font-bold tracking-tight" style={{ fontFamily: "var(--font-averia)" }}>Swing</h1>
+        <h1 className="text-5xl font-bold tracking-tight" style={{ fontFamily: "var(--font-onest)" }}>Swing</h1>
         <p className="mt-2 text-muted-foreground">Project, 2026</p>
       </div>
 
