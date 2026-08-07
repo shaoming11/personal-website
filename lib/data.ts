@@ -93,6 +93,18 @@ export const work: WorkItem[] = [
     expand: "/swing",
   },
   {
+    id: "mazenav",
+    title: "Maze Navigator",
+    category: "project",
+    label: "project",
+    date: "2026",
+    image: "/projects/mazenav.png",
+    description:
+      "Maze navigation robot built on ROS2 and Gazebo",
+    filter: "Projects",
+    github: "https://github.com/shaoming11/mazenav",
+  },
+  {
     id: "hand-cv",
     title: "Hand CV",
     category: "project",
@@ -143,18 +155,6 @@ export const work: WorkItem[] = [
     filter: "Projects",
     github: "https://github.com/101011101/GenAi",
     demo: "https://devpost.com/software/fraudsense-3gltkw",
-  },
-  {
-    id: "millikepedia",
-    title: "millikepedia",
-    category: "project",
-    label: "project",
-    date: "2026",
-    image: "/projects/millikeepedia.png",
-    description:
-      "Knowledge graph built for multidisciplinary learners",
-    filter: "Projects",
-    github: "https://github.com/shaoming11/millikepedia",
   },
   {
     id: "outreach",

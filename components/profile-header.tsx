@@ -2,7 +2,7 @@
 
 import { Mail, Moon, Sun } from "lucide-react"
 import type { SVGProps } from "react"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { coolThings } from "@/lib/data"
 
 function GithubIcon(props: SVGProps<SVGSVGElement>) {
@@ -18,6 +18,54 @@ function LinkedinIcon(props: SVGProps<SVGSVGElement>) {
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
       <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14ZM8.34 18.34v-8.2H5.62v8.2h2.72ZM6.98 9c.87 0 1.41-.58 1.41-1.3-.01-.74-.54-1.3-1.39-1.3-.85 0-1.41.56-1.41 1.3 0 .72.54 1.3 1.37 1.3h.02Zm11.36 9.34v-4.7c0-2.52-1.35-3.69-3.14-3.69-1.45 0-2.1.8-2.46 1.36v-1.17H9.99c.04.77 0 8.2 0 8.2h2.75v-4.58c0-.25.02-.49.09-.67.2-.49.65-1 1.4-1 .99 0 1.39.75 1.39 1.86v4.39h2.72Z" />
     </svg>
+  )
+}
+
+const NAME = "Shaoming Wu"
+
+function NameHeading() {
+  const containerRef = useRef<HTMLHeadingElement>(null)
+  const [selected, setSelected] = useState<Set<number>>(new Set())
+
+  const handleSelection = useCallback(() => {
+    const sel = document.getSelection()
+    if (!sel || sel.rangeCount === 0 || !containerRef.current) {
+      setSelected(new Set())
+      return
+    }
+
+    const next = new Set<number>()
+    const spans = containerRef.current.querySelectorAll<HTMLSpanElement>(".name-char")
+
+    spans.forEach((span, i) => {
+      if (sel.containsNode(span, true)) {
+        next.add(i)
+      }
+    })
+
+    setSelected(next)
+  }, [])
+
+  useEffect(() => {
+    document.addEventListener("selectionchange", handleSelection)
+    return () => document.removeEventListener("selectionchange", handleSelection)
+  }, [handleSelection])
+
+  return (
+    <h1
+      ref={containerRef}
+      className="text-pretty text-4xl font-bold tracking-tight sm:text-5xl"
+    >
+      {NAME.split("").map((char, i) => (
+        <span
+          key={i}
+          data-char={char}
+          className={`name-char ${selected.has(i) ? "name-char-selected" : ""}`}
+        >
+          {char}
+        </span>
+      ))}
+    </h1>
   )
 }
 
@@ -46,7 +94,7 @@ export function ProfileHeader() {
   return (
     <header>
       <div className="flex flex-wrap items-start justify-between gap-4">
-        <h1 className="text-pretty text-4xl font-bold tracking-tight sm:text-5xl">Shaoming Wu</h1>
+        <NameHeading />
 
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1">

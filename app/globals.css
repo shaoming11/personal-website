@@ -172,4 +172,27 @@
     background: #fff000;
     color: #000;
   }
+  .name-char {
+    position: relative;
+    display: inline-block;
+    white-space: pre;
+  }
+  .name-char::selection {
+    background: transparent;
+    color: transparent;
+  }
+  .name-char::before {
+    content: attr(data-char);
+    position: absolute;
+    inset: 0;
+    color: #000;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.25s ease;
+  }
+  .name-char-selected {
+    background: #fff000;
+  }
+  .name-char-selected::before {
+    clip-path: inset(0 0 0 0);
+  }
 }
