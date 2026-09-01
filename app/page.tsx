@@ -94,7 +94,7 @@ function SideNav() {
 
   return (
     <div
-      className="fixed z-9999 hidden sm:block"
+      className="fixed z-[9999] hidden sm:block"
       style={{
         top: "5.5rem",
         left: "min(calc(100% - 1rem), calc(50% + 26rem))",
@@ -111,9 +111,9 @@ function SideNav() {
               onMouseLeave={() => setHovered(null)}
               className="whitespace-nowrap text-left text-muted-foreground"
               style={{
-                transition: "font-size 300ms ease-out, font-weight 300ms ease-out, color 300ms ease-out",
+                transition: "font-weight 300ms ease-out, color 300ms ease-out",
                 color: isHovered ? "var(--foreground)" : undefined,
-                fontSize: isHovered ? "2.5rem" : "1rem",
+                fontSize: "1rem",
                 fontWeight: isHovered ? 700 : 400,
                 lineHeight: 1.8,
               }}

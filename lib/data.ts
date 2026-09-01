@@ -36,7 +36,8 @@ export const bioItems: BioSegment[][] = [
   ],
   [
     { text: "open-source CV @ " },
-    { link: "Roboflow", href: "https://roboflow.com", icon: "/icons/icon_rb.webp" },
+    { link: "Roboflow", href: "https://github.com/roboflow/supervision", icon: "/icons/icon_rb.webp" },
+    { text: " (49k+ ⭐️)" },
   ],
   [
     { text: "building a " },

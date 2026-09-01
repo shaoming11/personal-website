@@ -16,8 +16,8 @@ export function SidebarNav() {
         <button
           key={item.id}
           onClick={() => handleClick(item.id)}
-          className={`text-base transition-all hover:text-foreground hover:text-[1.05rem] ${
-            i === 0 ? "text-foreground" : "text-muted-foreground"
+          className={`text-base transition-all hover:text-foreground hover:font-bold ${
+            i === 0 ? "text-foreground font-bold" : "text-muted-foreground"
           }`}
         >
           {item.label}
