@@ -27,10 +27,6 @@ export const bioItems: BioSegment[][] = [
     { link: "UWaterloo", href: "https://uwaterloo.ca", icon: "/icons/icon_uw.png" },
   ],
   [
-    { text: "doing research on " },
-    { link: "world models", href: "#" },
-  ],
-  [
     { text: "building a self-driving car @ " },
     { link: "WATonomous", href: "https://watonomous.ca", icon: "/icons/icon_wato.jpeg" },
   ],
