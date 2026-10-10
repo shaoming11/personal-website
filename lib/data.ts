@@ -23,11 +23,11 @@ export type WorkItem = {
 
 export const bioItems: BioSegment[][] = [
   [
-    { text: "incoming mechatronics engineering @ " },
+    { text: "1st year mechatronics @ " },
     { link: "UWaterloo", href: "https://uwaterloo.ca", icon: "/icons/icon_uw.png" },
   ],
   [
-    { text: "building a self-driving car @ " },
+    { text: "simulating humanoids @ " },
     { link: "WATonomous", href: "https://watonomous.ca", icon: "/icons/icon_wato.jpeg" },
   ],
   [
@@ -37,17 +37,12 @@ export const bioItems: BioSegment[][] = [
   ],
   [
     { text: "building a " },
-    { link: "dexterous hand", href: "https://github.com/shaoming11/rb-proj" },
+    { link: "dexterous hand", href: "https://github.com/shaoming11/hand-sim" },
   ],
   [
     { text: "organizing toronto's largest " },
     { link: "summer hackathon", href: "https://hackthe6ix.com", icon: "/icons/icon_ht6.jpeg" },
     { text: " (400+ participants)" },
-  ],
-  [
-    { text: "previously organized " },
-    { link: "Hack Canada", href: "https://hackcanada.org", icon: "/icons/icon_hc.png" },
-    { text: " (700+ participants)" },
   ],
 ]
 
