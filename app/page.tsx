@@ -135,10 +135,9 @@ export default function AboutPage() {
     <PageShell fit mainClassName="mt-[112px] text-muted-foreground">
       <p className="reveal text-pretty" style={{ "--i": 0 } as React.CSSProperties}>
         I&rsquo;m a <Hi>mechatronics</Hi> student at{" "}
-        <span className="whitespace-nowrap text-foreground">
-          <InlineIcon src="/icons/icon_uw_crest.png" />
+        <Org icon="/icons/icon_uw_crest.png" href="https://uwaterloo.ca">
           Waterloo
-        </span>{" "}
+        </Org>{" "}
         passionate about <Hi>building and deploying robots</Hi>.
       </p>
 
