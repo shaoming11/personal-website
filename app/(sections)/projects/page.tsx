@@ -1,17 +1,16 @@
 import Image from "next/image"
 import Link from "next/link"
-import { PageShell, SectionsNav } from "@/components/site-header"
 import { projects } from "@/lib/data"
 import { fs } from "@/lib/utils"
 
 export default function ProjectsPage() {
   return (
-    <PageShell nav={<SectionsNav />}>
+    <>
       <div
         className="mt-8 grid gap-x-8 gap-y-14"
         style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))", fontSize: fs(16), lineHeight: 1.6 }}
       >
-        {projects.map((item, i) => {
+        {projects.map((item) => {
           const href = item.expand || item.github || item.demo
           const external = href?.startsWith("http")
 
@@ -40,9 +39,7 @@ export default function ProjectsPage() {
             </article>
           )
 
-          const style = { "--i": Math.min(i, 8) } as React.CSSProperties
-
-          if (!href) return <div key={item.id} className="reveal" style={style}>{card}</div>
+          if (!href) return <div key={item.id}>{card}</div>
 
           return (
             <Link
@@ -50,14 +47,13 @@ export default function ProjectsPage() {
               href={href}
               target={external ? "_blank" : undefined}
               rel={external ? "noreferrer noopener" : undefined}
-              className="group reveal"
-              style={style}
+              className="group"
             >
               {card}
             </Link>
           )
         })}
       </div>
-    </PageShell>
+    </>
   )
 }

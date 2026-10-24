@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -104,13 +104,42 @@ export function BackLink() {
   )
 }
 
+type Bar = { left: number; top: number; width: number }
+
 export function SectionsNav() {
   const pathname = usePathname()
+  const rowRef = useRef<HTMLDivElement>(null)
+  const labelRefs = useRef<Record<string, HTMLSpanElement | null>>({})
+  const [bar, setBar] = useState<Bar | null>(null)
+  // Off for the first placement so the bar doesn't slide in from the corner on load.
+  const [slide, setSlide] = useState(false)
+
+  // Put the active-tab underline under the current tab's label; the transition slides it between tabs.
+  useLayoutEffect(() => {
+    const measure = () => {
+      const current = navItems.find((item) => item.href === pathname)
+      const label = current ? labelRefs.current[current.id] : null
+      const row = rowRef.current
+      if (!label || !row) return setBar(null)
+      const r = row.getBoundingClientRect()
+      const l = label.getBoundingClientRect()
+      setBar({ left: l.left - r.left, top: l.bottom - r.top - 1, width: l.width })
+    }
+    measure()
+    document.fonts?.ready.then(measure)
+    window.addEventListener("resize", measure)
+    return () => window.removeEventListener("resize", measure)
+  }, [pathname])
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setSlide(true))
+    return () => cancelAnimationFrame(id)
+  }, [])
 
   return (
     <nav aria-label="Sections" className="reveal flex flex-col items-start" style={{ "--i": 1 } as React.CSSProperties}>
       <BackLink />
-      <div className="flex flex-wrap gap-x-[26px]">
+      <div ref={rowRef} className="relative flex flex-wrap gap-x-[26px]">
         {navItems.map((item) => {
           const active = pathname === item.href
           return (
@@ -118,16 +147,26 @@ export function SectionsNav() {
               key={item.id}
               href={item.href}
               aria-current={active ? "page" : undefined}
-              className={
-                active
-                  ? "text-foreground underline underline-offset-[5px]"
-                  : "text-muted-foreground hover:text-foreground"
-              }
+              className={`transition-colors duration-300 ${active ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
             >
-              {active ? item.label : <span className="trace-underline">{item.label}</span>}
+              <span
+                ref={(el) => {
+                  labelRefs.current[item.id] = el
+                }}
+                className={active ? "pb-[2px]" : "trace-underline"}
+              >
+                {item.label}
+              </span>
             </Link>
           )
         })}
+        {bar && (
+          <span
+            aria-hidden="true"
+            className={`pointer-events-none absolute left-0 h-px bg-foreground ${slide ? "transition-[transform,width] duration-[450ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none" : ""}`}
+            style={{ top: bar.top, width: bar.width, transform: `translateX(${bar.left}px)` }}
+          />
+        )}
       </div>
     </nav>
   )
