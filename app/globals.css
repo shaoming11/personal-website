@@ -51,7 +51,7 @@
 
 :root {
   color-scheme: light;
-  --text-scale: 0.5;
+  --text-scale: 0.88;
   --background: oklch(1 0 0);
   --foreground: #111111;
   --card: oklch(1 0 0);
