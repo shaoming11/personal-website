@@ -1,49 +1,10 @@
-// ── Types ──
+// ── Nav ──
 
-export type BioSegment = { text: string } | { link: string; href: string; icon?: string }
+export type NavItem = { id: string; label: string; href: string }
 
-export type WorkCategory = "project" | "experience" | "community"
-
-export type WorkItem = {
-  id: string
-  title: string
-  category: WorkCategory
-  label: string
-  date: string
-  image: string
-  stack?: string
-  description: string
-  filter: "Projects" | "Communities" | "Experience"
-  github?: string
-  demo?: string
-  expand?: string
-}
-
-// ── Bio ──
-
-export const bioItems: BioSegment[][] = [
-  [
-    { text: "1st year mechatronics @ " },
-    { link: "UWaterloo", href: "https://uwaterloo.ca", icon: "/icons/icon_uw.png" },
-  ],
-  [
-    { text: "simulating humanoids @ " },
-    { link: "WATonomous", href: "https://watonomous.ca", icon: "/icons/icon_wato.jpeg" },
-  ],
-  [
-    { text: "open-source CV @ " },
-    { link: "Roboflow", href: "https://github.com/roboflow/supervision", icon: "/icons/icon_rb.webp" },
-    { text: " (49k+ ⭐️)" },
-  ],
-  [
-    { text: "building a " },
-    { link: "dexterous hand", href: "https://github.com/shaoming11/hand-sim" },
-  ],
-  [
-    { text: "organizing toronto's largest " },
-    { link: "summer hackathon", href: "https://hackthe6ix.com", icon: "/icons/icon_ht6.jpeg" },
-    { text: " (400+ participants)" },
-  ],
+export const navItems: NavItem[] = [
+  { id: "experience", label: "experience", href: "/experience" },
+  { id: "projects", label: "projects", href: "/projects" },
 ]
 
 // ── Socials ──
@@ -54,154 +15,107 @@ export const socials = [
   { label: "github", href: "https://github.com/shaoming11" },
 ]
 
-// ── Nav ──
+export const email = "s474wu@uwaterloo.ca"
 
-export const navItems = [
-  { id: "about", label: "about" },
-  { id: "projects", label: "projects" },
-  { id: "writing", label: "writing" },
+export const resumeHref = "/Shaoming%20Wu%20Resume.pdf"
+
+// ── Landing ──
+
+export type FeaturedProject = {
+  id: string
+  title: string
+  description: string
+  image?: string
+  code?: string
+  demo?: string
+}
+
+export const featuredProjects: FeaturedProject[] = [
+  {
+    id: "the-brackey-way",
+    title: "The Brackey Way",
+    description: "Fine-tuned pi0.5 on a Bracketbot",
+    image: "/projects/brackey-way.jpg",
+    code: "https://github.com/shaoming11/thebracketway",
+    demo: "https://devpost.com/software/the-brackey-way",
+  },
+  {
+    id: "hand-sim",
+    title: "Water bottle opener",
+    description: "Parallel trained in MJX & MuJoCo",
+    image: "/projects/hand-sim.gif",
+    code: "https://github.com/shaoming11/hand-sim",
+  },
+  {
+    id: "autochem",
+    title: "AutoCHEM",
+    description: "Automated wet lab with a digital twin in MuJoCo",
+    image: "/projects/autochem.jpg",
+    code: "https://github.com/shaoming11/hh-winners",
+    demo: "https://devpost.com/software/autochem",
+  },
 ]
 
-// ── Blog Posts ──
+// ── Experience ──
 
-export const blogPosts = [
-  { title: "coming soon", date: "N/A" },
-]
+export type ExperienceCategory = "work" | "community"
 
-// ── Projects ──
+export type ExperienceItem = {
+  id: string
+  role: string
+  company: string
+  description: string
+  category: ExperienceCategory
+  image?: string
+  github?: string
+  demo?: string
+}
 
-export const work: WorkItem[] = [
+export const experience: ExperienceItem[] = [
   {
-    id: "swing",
-    title: "Swing",
-    category: "project",
-    label: "project",
-    date: "2026",
-    image: "/projects/swing.png",
-    description:
-      "Self-improving agent trained on the stock market",
-    filter: "Projects",
-    github: "https://github.com/shaoming11/swing-trader",
-    expand: "/swing",
+    id: "magic-hour",
+    role: "software engineer",
+    company: "Magic Hour",
+    description: "YC W24 AI video platform",
+    category: "work",
   },
   {
-    id: "mazenav",
-    title: "Maze Navigator",
-    category: "project",
-    label: "project",
-    date: "2026",
-    image: "/projects/mazenav.png",
-    description:
-      "Maze navigation robot built on ROS2 and Gazebo",
-    filter: "Projects",
-    github: "https://github.com/shaoming11/mazenav",
+    id: "watonomous",
+    role: "simulation developer",
+    company: "WATonomous",
+    description: "Self-driving car team, working in CARLA",
+    category: "work",
   },
   {
-    id: "hand-cv",
-    title: "Hand CV",
-    category: "project",
-    label: "project",
-    date: "2026",
-    image: "/projects/hand.png",
-    description:
-      "CV model trained on hand gestures for humanoids",
-    filter: "Projects",
-    github: "https://github.com/shaoming11/rb-proj",
+    id: "hack-the-6ix",
+    role: "engineering director",
+    company: "Hack the 6ix",
+    description: "Toronto's largest summer hackathon",
+    category: "community",
   },
   {
-    id: "dm5",
-    title: "DM5",
-    category: "project",
-    label: "project",
-    date: "2026",
-    image: "/projects/dm6.png",
-    description:
-      "Agentic orchestration pipeline for product managers",
-    filter: "Projects",
-    github: "https://github.com/PhongCT1105/YC_Hack",
-    demo: "https://research-sprint-phong-caos-projects.vercel.app/dashboard/sp_450d26db474d?key=bee5be1b841fb8fac5a1394e05c92938",
+    id: "roboflow",
+    role: "open-source",
+    company: "Roboflow",
+    description: "Contributions to computer vision tooling",
+    category: "work",
   },
   {
-    id: "pral",
-    title: "PRAL",
-    category: "project",
-    label: "project",
-    date: "2026",
-    image: "/projects/pral.png",
-    description:
-      "Autonomous drone flight planner for cinematography",
-    filter: "Projects",
-    github: "https://github.com/101011101/PRAL-Drone-Systems",
-    demo: "https://devpost.com/software/pral",
+    id: "hack-canada",
+    role: "organizer",
+    company: "Hack Canada",
+    description: "Outreach executive for the student hackathon",
+    category: "community",
   },
   {
-    id: "fraudgen",
-    title: "FraudGen",
-    category: "project",
-    label: "project",
-    date: "2026",
-    image: "/projects/fraudgen.png",
-    stack: "ts",
-    description:
-      "Synthetic data generation for machine learning in finance",
-    filter: "Projects",
-    github: "https://github.com/101011101/GenAi",
-    demo: "https://devpost.com/software/fraudsense-3gltkw",
-  },
-  {
-    id: "outreach",
-    title: "Outreach",
-    category: "project",
-    label: "project",
-    date: "2026",
-    image: "/projects/hc-outreach.png",
-    description:
-      "Agentic outreach pipeline + CRM for securing sponsorships",
-    filter: "Projects",
-    github: "https://github.com/shaoming11/hc-outreach",
-  },
-  {
-    id: "vex-robotics",
-    title: "VEX Robotics",
-    category: "experience",
-    label: "co-founder",
-    date: "2025",
+    id: "altura-robotics",
+    role: "co-founder",
+    company: "Altura Robotics",
+    description: "VEX nonprofit running tournaments and workshops",
+    category: "community",
     image: "/projects/VEX.png",
-    description:
-      "Robots built on the VEX V5 ecosystem for competitive robotics",
-    filter: "Experience",
     github: "https://github.com/shaoming11/shao-lib",
     demo: "https://www.instagram.com/alturafoundation/",
-  },
-]
-
-// ── Cool Things ──
-
-export const coolThings: { text: string; highlight?: string; color?: string }[] = [
-  {
-    text: "architected an autonomous drone cinematography pipeline with ",
-    highlight: "5 stages",
-    color: "bg-[#00ffff]/30 dark:bg-[#00ffff]/25",
-  },
-  {
-    text: "won ",
-    highlight: "first place @ JAMHacks 10",
-    color: "bg-[#39ff14]/30 dark:bg-[#39ff14]/25",
-  },
-  {
-    text: "organized a hackathon for ",
-    highlight: "700+ participants",
-    color: "bg-[#ffff00]/30 dark:bg-[#ffff00]/25",
-  },
-  {
-    text: "qualified 4 times to ",
-    highlight: "VEX Worlds",
-    color: "bg-[#ff6ec7]/30 dark:bg-[#ff6ec7]/25",
-  },
-  {
-    text: "introduced engineering principles to ",
-    highlight: "10,000+ students",
-    color: "bg-[#bf00ff]/30 dark:bg-[#bf00ff]/25",
   },
 ]
 
@@ -213,4 +127,120 @@ export const awards = [
   { title: "JAMHacks 9 — Best Use of Generative AI", date: "May 2025" },
   { title: "Riverbots Champion + VEX Worlds Qualifier", date: "Dec 2024" },
   { title: "VEX Robotics Regional Champion (2x)", date: "2024 — 2025" },
+]
+
+// ── Education ──
+
+export const education = [
+  {
+    school: "University of Waterloo",
+    program: "BASc., Mechatronics Engineering (Incoming)",
+    date: "Sep 2026 — 2031",
+  },
+  {
+    school: "Milliken Mills High School",
+    program: "IB Programme",
+    date: "Sep 2022 — Jun 2026",
+  },
+]
+
+// ── Projects ──
+
+export type ProjectItem = {
+  id: string
+  title: string
+  description: string
+  image?: string
+  github?: string
+  demo?: string
+  expand?: string
+}
+
+export const projects: ProjectItem[] = [
+  {
+    id: "swing",
+    title: "Swing",
+    description: "Self-improving agent trained on the stock market",
+    image: "/projects/swing.png",
+    github: "https://github.com/shaoming11/swing-trader",
+    expand: "/swing",
+  },
+  {
+    id: "pi0-humanoid",
+    title: "pi0 humanoid",
+    description: "Self-balancing 7-DOF humanoid running a fine-tuned pi0 VLA",
+  },
+  {
+    id: "the-brackey-way",
+    title: "the brackey way",
+    description: "Sandwich-making VLA, built at the Battle of the Schools hackathon",
+    image: "/projects/brackey-way.jpg",
+    github: "https://github.com/shaoming11/thebracketway",
+    demo: "https://devpost.com/software/the-brackey-way",
+  },
+  {
+    id: "hand-sim",
+    title: "hand sim",
+    description: "Shadow Hand unscrewing a bottle cap, parallel trained in MJX & MuJoCo",
+    image: "/projects/hand-sim.gif",
+    github: "https://github.com/shaoming11/hand-sim",
+  },
+  {
+    id: "autochem",
+    title: "AutoCHEM",
+    description: "Low-cost automated wet lab with a digital twin in MuJoCo",
+    image: "/projects/autochem.jpg",
+    github: "https://github.com/shaoming11/hh-winners",
+    demo: "https://devpost.com/software/autochem",
+  },
+  {
+    id: "the-matrix",
+    title: "the matrix",
+    description: "Three ESP32 camera cars that navigate a maze as a swarm",
+  },
+  {
+    id: "mazenav",
+    title: "Maze Navigator",
+    description: "Maze navigation robot built on ROS2 and Gazebo",
+    image: "/projects/mazenav.png",
+    github: "https://github.com/shaoming11/mazenav",
+  },
+  {
+    id: "hand-cv",
+    title: "Hand CV",
+    description: "CV model trained on hand gestures for humanoids",
+    image: "/projects/hand.png",
+    github: "https://github.com/shaoming11/rb-proj",
+  },
+  {
+    id: "pral",
+    title: "PRAL Drone Systems",
+    description: "Autonomous drone cinematography pipeline. 1st at JAMHacks 10",
+    image: "/projects/pral.png",
+    github: "https://github.com/101011101/PRAL-Drone-Systems",
+    demo: "https://devpost.com/software/pral",
+  },
+  {
+    id: "dm5",
+    title: "DM5",
+    description: "Agentic orchestration pipeline for product managers",
+    image: "/projects/dm6.png",
+    github: "https://github.com/PhongCT1105/YC_Hack",
+    demo: "https://research-sprint-phong-caos-projects.vercel.app/dashboard/sp_450d26db474d?key=bee5be1b841fb8fac5a1394e05c92938",
+  },
+  {
+    id: "fraudgen",
+    title: "FraudGen",
+    description: "Synthetic data generation for machine learning in finance",
+    image: "/projects/fraudgen.png",
+    github: "https://github.com/101011101/GenAi",
+    demo: "https://devpost.com/software/fraudsense-3gltkw",
+  },
+  {
+    id: "outreach",
+    title: "Outreach",
+    description: "Agentic outreach pipeline + CRM for securing sponsorships",
+    image: "/projects/hc-outreach.png",
+    github: "https://github.com/shaoming11/hc-outreach",
+  },
 ]

@@ -5,11 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-heading: var(--font-averia), 'Averia Gruesa Libre', cursive;
   --font-sans: var(--font-geist-sans), 'Geist Fallback';
   --font-mono: var(--font-geist-mono), 'Geist Mono Fallback';
   --font-onest: var(--font-onest), 'Onest', sans-serif;
-  --font-averia: var(--font-averia), 'Averia Gruesa Libre', cursive;
+  --font-roboto-mono: var(--font-roboto-mono), 'Roboto Mono', ui-monospace, monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -52,8 +51,9 @@
 
 :root {
   color-scheme: light;
+  --text-scale: 0.5;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --foreground: #111111;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -63,7 +63,7 @@
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: #6b6b6b;
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -161,7 +161,7 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    transition: background-color 200ms cubic-bezier(0.25, 1, 0.5, 1), color 200ms cubic-bezier(0.25, 1, 0.5, 1), border-color 200ms cubic-bezier(0.25, 1, 0.5, 1);
   }
   body {
     @apply bg-background text-foreground;
@@ -173,27 +173,39 @@
     background: #fff000;
     color: #000;
   }
-  .name-char {
-    position: relative;
-    display: inline-block;
-    white-space: pre;
+  :focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 3px;
   }
-  .name-char::selection {
-    background: transparent;
-    color: transparent;
+}
+
+@layer utilities {
+  .reveal {
+    animation: reveal-up 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--i, 0) * 45ms);
   }
-  .name-char::before {
-    content: attr(data-char);
-    position: absolute;
-    inset: 0;
-    color: #000;
-    clip-path: inset(0 100% 0 0);
-    transition: clip-path 0.25s ease;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
-  .name-char-selected {
-    background: #fff000;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .name-char-selected::before {
-    clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
