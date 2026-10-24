@@ -148,7 +148,7 @@ export function PageShell({
 }) {
   return (
     <div
-      className={`bg-background text-foreground ${fit ? "min-h-dvh md:[@media(min-height:700px)]:h-dvh md:[@media(min-height:700px)]:overflow-hidden" : "min-h-screen pb-[100px]"}`}
+      className={`bg-background text-foreground ${fit ? "min-h-dvh lg:[@media(min-height:700px)]:h-dvh lg:[@media(min-height:700px)]:overflow-hidden" : "min-h-screen pb-[100px]"}`}
       style={{ fontFamily: "var(--font-roboto-mono), ui-monospace, Menlo, Consolas, monospace", fontSize: fs(17), lineHeight: 2.4 }}
     >
       <SiteHeader />

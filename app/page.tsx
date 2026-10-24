@@ -11,6 +11,16 @@ function Hi({ children }: { children: React.ReactNode }) {
   return <span className="text-foreground">{children}</span>
 }
 
+// Company name with its logo inline; the logo is sized in em so it tracks the text scale.
+function Org({ icon, children }: { icon: string; children: React.ReactNode }) {
+  return (
+    <span className="whitespace-nowrap text-foreground">
+      <Image src={icon} alt="" width={32} height={32} className="mr-[0.35em] inline-block size-[1.05em] rounded-[3px] object-cover align-[-0.17em]" />
+      {children}
+    </span>
+  )
+}
+
 function CodeIcon() {
   return (
     <svg aria-hidden="true" style={{ width: fs(18), height: fs(18) }} viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -102,8 +112,8 @@ export default function AboutPage() {
           projects
         </Link>
         <div
-          className="mt-1.5 grid gap-x-[30px] gap-y-8"
-          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", fontSize: fs(16), lineHeight: 1.8 }}
+          className="mt-1.5 grid grid-cols-1 gap-x-[30px] gap-y-8 lg:grid-cols-3"
+          style={{ fontSize: fs(16), lineHeight: 1.8 }}
         >
           {featuredProjects.map((item) => (
             <ProjectTile key={item.id} item={item} />
@@ -128,10 +138,11 @@ export default function AboutPage() {
           experience
         </Link>
         <p className={`text-pretty transition-colors duration-300 ${exp ? "text-foreground/80" : "text-muted-foreground"}`}>
-          Currently I&rsquo;m optimizing <Hi>diffusion models</Hi> at <Hi>Magic Hour (YC W24)</Hi>, simulating <Hi>humanoids</Hi> at{" "}
-          <Hi>WATonomous</Hi>, and leading engineering at <Hi>Hack the 6ix (2000+ applicants, $50k+ in sponsorships)</Hi>. Previously I
-          contributed open-source to <Hi>Supervision (49k+ stars) at Roboflow</Hi>. Organized <Hi>Hack Canada</Hi> for{" "}
-          <Hi>700+ participants</Hi>.
+          Currently I&rsquo;m optimizing <Hi>diffusion models</Hi> at <Org icon="/icons/icon_mh.png">Magic Hour</Org>{" "}
+          <Hi>(YC W24)</Hi>, simulating <Hi>humanoids</Hi> at <Org icon="/icons/icon_wato.jpeg">WATonomous</Org>, and leading engineering
+          at <Org icon="/icons/icon_ht6.jpeg">Hack the 6ix</Org> <Hi>(2000+ applicants, $50k+ in sponsorships)</Hi>. Previously I
+          contributed open-source to <Hi>Supervision (49k+ stars)</Hi> at <Org icon="/icons/icon_rb.webp">Roboflow</Org>. Organized{" "}
+          <Org icon="/icons/icon_hc.png">Hack Canada</Org> for <Hi>700+ participants</Hi>.
         </p>
       </section>
 
