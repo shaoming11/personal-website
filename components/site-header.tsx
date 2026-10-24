@@ -153,7 +153,7 @@ export function SectionsNav() {
                 ref={(el) => {
                   labelRefs.current[item.id] = el
                 }}
-                className={active ? "pb-[2px]" : "trace-underline"}
+                className="pb-[2px]"
               >
                 {item.label}
               </span>
