@@ -32,7 +32,7 @@ export default function ProjectsPage() {
                 <div aria-hidden="true" className="aspect-3/2 w-full border-b-2 border-foreground bg-[#f4f4f4] dark:bg-[#1c1c1c]" />
               )}
               <div className="flex flex-col items-start gap-0.5">
-                <span className="text-foreground group-hover:underline underline-offset-4">
+                <span className="trace-underline text-foreground">
                   <strong>{item.title}</strong>
                 </span>
                 <p className="text-muted-foreground text-pretty">{item.description}</p>

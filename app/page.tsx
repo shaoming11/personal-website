@@ -16,7 +16,7 @@ const inlineLink = "text-foreground"
 function Ext({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <a href={href} target="_blank" rel="noreferrer noopener" className={inlineLink}>
-      <span className="trace-underline">{children}</span>
+      <span className="trace-underline trace-rest">{children}</span>
     </a>
   )
 }
@@ -31,7 +31,7 @@ function Org({ icon, href, children }: { icon: string; href: string; children: R
   return (
     <a href={href} target="_blank" rel="noreferrer noopener" className={`whitespace-nowrap ${inlineLink}`}>
       <InlineIcon src={icon} />
-      <span className="trace-underline">{children}</span>
+      <span className="trace-underline trace-rest">{children}</span>
     </a>
   )
 }
@@ -126,7 +126,7 @@ function ProjectTile({ item }: { item: FeaturedProject }) {
   )
 }
 
-const headingLink = "block w-fit text-foreground underline underline-offset-[5px]"
+const headingLink = "block w-fit text-foreground"
 
 export default function AboutPage() {
   const [exp, setExp] = useState(false)
@@ -152,7 +152,7 @@ export default function AboutPage() {
           className={headingLink}
           style={{ fontSize: fs(16), lineHeight: 2 }}
         >
-          projects
+          <span className="trace-underline trace-rest">projects</span>
         </Link>
         <div
           className="mt-1.5 grid grid-cols-1 gap-x-[30px] gap-y-8 lg:grid-cols-3"
@@ -178,7 +178,7 @@ export default function AboutPage() {
           onFocus={() => setExp(true)}
           onBlur={() => setExp(false)}
         >
-          experience
+          <span className="trace-underline trace-rest">experience</span>
         </Link>
         <p className={`text-pretty transition-colors duration-300 ${exp ? "text-foreground/80" : "text-muted-foreground"}`}>
           Currently I&rsquo;m optimizing <Hi>diffusion models</Hi> at <Org icon="/icons/icon_mh.png" href="https://magichour.ai">Magic Hour</Org>{" "}
@@ -191,14 +191,14 @@ export default function AboutPage() {
 
       <nav aria-label="Pages" className="reveal mt-6 flex flex-wrap gap-x-[26px]" style={{ "--i": 3 } as React.CSSProperties}>
         {/* TODO: point at the writing page once it exists */}
-        <a href="#" onClick={(e) => e.preventDefault()} className="text-foreground underline underline-offset-[5px]">
-          writing
+        <a href="#" onClick={(e) => e.preventDefault()} className="text-foreground">
+          <span className="trace-underline trace-rest">writing</span>
         </a>
-        <Link href="/people" className="text-foreground underline underline-offset-[5px]">
-          people
+        <Link href="/people" className="text-foreground">
+          <span className="trace-underline trace-rest">people</span>
         </Link>
-        <a href={resumeHref} target="_blank" rel="noreferrer noopener" className="text-foreground underline underline-offset-[5px]">
-          resume
+        <a href={resumeHref} target="_blank" rel="noreferrer noopener" className="text-foreground">
+          <span className="trace-underline trace-rest">resume</span>
         </a>
       </nav>
     </PageShell>

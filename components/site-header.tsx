@@ -38,8 +38,8 @@ function EmailButton() {
 
   return (
     <>
-      <button type="button" onClick={copy} title={email} className="cursor-pointer hover:underline underline-offset-4">
-        email
+      <button type="button" onClick={copy} title={email} className="cursor-pointer">
+        <span className="trace-underline">email</span>
       </button>
       <span role="status" aria-live="polite" className="sr-only">
         {visible ? "email copied" : ""}
@@ -73,8 +73,8 @@ export function SiteHeader() {
       className="reveal flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 text-foreground"
       style={{ padding: "30px clamp(20px, 3.2vw, 46px) 0", fontSize: fs(16), lineHeight: 1.7 }}
     >
-      <Link href="/" className="hover:underline underline-offset-4">
-        shaoming wu
+      <Link href="/">
+        <span className="trace-underline">shaoming wu</span>
       </Link>
       <nav aria-label="Social links" className="flex flex-wrap gap-x-5">
         {socials.map((s) => (
@@ -83,9 +83,8 @@ export function SiteHeader() {
             href={s.href}
             target={s.href.startsWith("http") ? "_blank" : undefined}
             rel={s.href.startsWith("http") ? "noreferrer noopener" : undefined}
-            className="hover:underline underline-offset-4"
           >
-            {s.label}
+            <span className="trace-underline">{s.label}</span>
           </a>
         ))}
         <EmailButton />
@@ -96,11 +95,11 @@ export function SiteHeader() {
 
 export function BackLink() {
   return (
-    <Link href="/" className="inline-flex items-center gap-[calc(var(--text-scale)*10px)] text-muted-foreground hover:text-foreground hover:underline underline-offset-4">
+    <Link href="/" className="inline-flex items-center gap-[calc(var(--text-scale)*10px)] text-muted-foreground hover:text-foreground">
       <svg aria-hidden="true" style={{ width: fs(16), height: fs(16) }} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 8H2M7 3 2 8l5 5" />
       </svg>
-      about
+      <span className="trace-underline">about</span>
     </Link>
   )
 }
@@ -122,10 +121,10 @@ export function SectionsNav() {
               className={
                 active
                   ? "text-foreground underline underline-offset-[5px]"
-                  : "text-muted-foreground hover:text-foreground hover:underline underline-offset-[5px]"
+                  : "text-muted-foreground hover:text-foreground"
               }
             >
-              {item.label}
+              {active ? item.label : <span className="trace-underline">{item.label}</span>}
             </Link>
           )
         })}
