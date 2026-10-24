@@ -78,6 +78,7 @@ export const experience: ExperienceItem[] = [
     company: "Magic Hour",
     description: "YC W24 AI video platform",
     category: "work",
+    image: "/experience/magic-hour.jpg",
   },
   {
     id: "watonomous",
@@ -85,6 +86,7 @@ export const experience: ExperienceItem[] = [
     company: "WATonomous",
     description: "Self-driving car team, working in CARLA",
     category: "work",
+    image: "/experience/watonomous.jpg",
   },
   {
     id: "hack-the-6ix",
@@ -92,6 +94,7 @@ export const experience: ExperienceItem[] = [
     company: "Hack the 6ix",
     description: "Toronto's largest summer hackathon",
     category: "community",
+    image: "/experience/hack-the-6ix.jpg",
   },
   {
     id: "roboflow",
@@ -99,6 +102,7 @@ export const experience: ExperienceItem[] = [
     company: "Roboflow",
     description: "Contributions to computer vision tooling",
     category: "work",
+    image: "/experience/roboflow.jpg",
   },
   {
     id: "hack-canada",
@@ -106,6 +110,7 @@ export const experience: ExperienceItem[] = [
     company: "Hack Canada",
     description: "Outreach executive for the student hackathon",
     category: "community",
+    image: "/experience/hack-canada.jpg",
   },
   {
     id: "altura-robotics",
@@ -113,7 +118,7 @@ export const experience: ExperienceItem[] = [
     company: "Altura Robotics",
     description: "VEX nonprofit running tournaments and workshops",
     category: "community",
-    image: "/projects/VEX.png",
+    image: "/experience/altura-robotics.jpg",
     github: "https://github.com/shaoming11/shao-lib",
     demo: "https://www.instagram.com/alturafoundation/",
   },
@@ -192,6 +197,8 @@ export const projects: ProjectItem[] = [
     id: "the-matrix",
     title: "the matrix",
     description: "Three ESP32 camera cars that navigate a maze as a swarm",
+    github: "https://github.com/VedantSheel08/thematrix",
+    demo: "https://devpost.com/software/the-matrix-ws2yiq",
   },
   {
     id: "mazenav",
@@ -199,13 +206,6 @@ export const projects: ProjectItem[] = [
     description: "Maze navigation robot built on ROS2 and Gazebo",
     image: "/projects/mazenav.png",
     github: "https://github.com/shaoming11/mazenav",
-  },
-  {
-    id: "hand-cv",
-    title: "Hand CV",
-    description: "CV model trained on hand gestures for humanoids",
-    image: "/projects/hand.png",
-    github: "https://github.com/shaoming11/rb-proj",
   },
   {
     id: "pral",
@@ -222,20 +222,5 @@ export const projects: ProjectItem[] = [
     image: "/projects/dm6.png",
     github: "https://github.com/PhongCT1105/YC_Hack",
     demo: "https://research-sprint-phong-caos-projects.vercel.app/dashboard/sp_450d26db474d?key=bee5be1b841fb8fac5a1394e05c92938",
-  },
-  {
-    id: "fraudgen",
-    title: "FraudGen",
-    description: "Synthetic data generation for machine learning in finance",
-    image: "/projects/fraudgen.png",
-    github: "https://github.com/101011101/GenAi",
-    demo: "https://devpost.com/software/fraudsense-3gltkw",
-  },
-  {
-    id: "outreach",
-    title: "Outreach",
-    description: "Agentic outreach pipeline + CRM for securing sponsorships",
-    image: "/projects/hc-outreach.png",
-    github: "https://github.com/shaoming11/hc-outreach",
   },
 ]
