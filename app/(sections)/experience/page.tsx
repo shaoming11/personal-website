@@ -57,7 +57,7 @@ export default function ExperiencePage() {
           <article key={item.id} className="group flex flex-col items-start">
             {item.image ? (
               <div className="grain relative aspect-3/2 w-full overflow-hidden border-b-2 border-foreground" style={{ background: backdrop(item.id) }}>
-                <div className="absolute inset-0 flex items-center justify-center p-[11%]">
+                <div className="absolute inset-0 z-[1] flex items-center justify-center p-[11%]">
                   <Image
                     src={item.image}
                     alt={`${item.company} preview`}
