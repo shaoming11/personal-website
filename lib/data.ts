@@ -84,7 +84,7 @@ export const experience: ExperienceItem[] = [
     id: "watonomous",
     role: "simulation developer",
     company: "WATonomous",
-    description: "Self-driving car team, working in CARLA",
+    description: "Simulating humanoids, training policies to manipulate deformable objects",
     category: "work",
     image: "/experience/watonomous.jpg",
   },
