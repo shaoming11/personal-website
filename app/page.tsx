@@ -11,12 +11,12 @@ function Hi({ children }: { children: React.ReactNode }) {
   return <span className="text-foreground">{children}</span>
 }
 
-const inlineLink = "text-foreground underline decoration-foreground/30 underline-offset-4 transition-[text-decoration-color] hover:decoration-foreground"
+const inlineLink = "text-foreground"
 
 function Ext({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <a href={href} target="_blank" rel="noreferrer noopener" className={inlineLink}>
-      {children}
+      <span className="trace-underline">{children}</span>
     </a>
   )
 }
@@ -26,7 +26,7 @@ function Org({ icon, href, children }: { icon: string; href: string; children: R
   return (
     <a href={href} target="_blank" rel="noreferrer noopener" className={`whitespace-nowrap ${inlineLink}`}>
       <Image src={icon} alt="" width={32} height={32} className="mr-[0.35em] inline-block size-[1.05em] rounded-[3px] object-cover align-[-0.17em]" />
-      {children}
+      <span className="trace-underline">{children}</span>
     </a>
   )
 }
