@@ -4,7 +4,6 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { PageShell } from "@/components/site-header"
-import { ProjectVideo } from "@/components/project-video"
 import { featuredProjects, resumeHref, type FeaturedProject } from "@/lib/data"
 import { fs } from "@/lib/utils"
 
@@ -66,9 +65,7 @@ function ProjectTile({ item }: { item: FeaturedProject }) {
   return (
     <article className="group flex flex-col gap-2">
       <div className="relative aspect-3/1 overflow-hidden bg-[#d9d9d9] transition-[background-color,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-[3px] group-hover:bg-[#cdcdcd] group-focus-within:-translate-y-[3px] group-focus-within:bg-[#cdcdcd] dark:bg-[#2a2a2a] dark:group-hover:bg-[#333] dark:group-focus-within:bg-[#333]">
-        {item.video ? (
-          <ProjectVideo src={item.video} className="absolute inset-0 size-full object-cover" />
-        ) : item.image && (
+        {item.image && (
           <Image
             src={item.image}
             alt={`${item.title} preview`}
