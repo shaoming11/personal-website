@@ -71,7 +71,7 @@ function ProjectTile({ item }: { item: FeaturedProject }) {
         target="_blank"
         rel="noreferrer noopener"
         aria-label={`${item.title} project`}
-        className="relative block aspect-3/1 overflow-hidden bg-[#d9d9d9] transition-[background-color,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-[3px] group-hover:bg-[#cdcdcd] group-focus-within:-translate-y-[3px] group-focus-within:bg-[#cdcdcd] dark:bg-[#2a2a2a] dark:group-hover:bg-[#333] dark:group-focus-within:bg-[#333]">
+        className="relative block aspect-3/1 overflow-hidden bg-[#d9d9d9] transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-[#cdcdcd] group-focus-within:bg-[#cdcdcd] dark:bg-[#2a2a2a] dark:group-hover:bg-[#333] dark:group-focus-within:bg-[#333]">
         {item.image && (
           <Image
             src={item.image}
