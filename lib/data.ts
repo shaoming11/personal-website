@@ -166,11 +166,6 @@ export const projects: ProjectItem[] = [
     expand: "/swing",
   },
   {
-    id: "pi0-humanoid",
-    title: "pi0 humanoid",
-    description: "Self-balancing 7-DOF humanoid running a fine-tuned pi0 VLA",
-  },
-  {
     id: "the-brackey-way",
     title: "the brackey way",
     description: "Sandwich-making VLA, built at the Battle of the Schools hackathon",
