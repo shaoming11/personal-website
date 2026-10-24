@@ -62,9 +62,16 @@ function IconLink({ href, label, children }: { href: string; label: string; chil
 }
 
 function ProjectTile({ item }: { item: FeaturedProject }) {
+  // Media links to the writeup when there is one, otherwise the code.
+  const href = item.demo ?? item.code
   return (
     <article className="group flex flex-col gap-2">
-      <div className="relative aspect-3/1 overflow-hidden bg-[#d9d9d9] transition-[background-color,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-[3px] group-hover:bg-[#cdcdcd] group-focus-within:-translate-y-[3px] group-focus-within:bg-[#cdcdcd] dark:bg-[#2a2a2a] dark:group-hover:bg-[#333] dark:group-focus-within:bg-[#333]">
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label={`${item.title} project`}
+        className="relative block aspect-3/1 overflow-hidden bg-[#d9d9d9] transition-[background-color,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-[3px] group-hover:bg-[#cdcdcd] group-focus-within:-translate-y-[3px] group-focus-within:bg-[#cdcdcd] dark:bg-[#2a2a2a] dark:group-hover:bg-[#333] dark:group-focus-within:bg-[#333]">
         {item.image && (
           <Image
             src={item.image}
@@ -75,7 +82,7 @@ function ProjectTile({ item }: { item: FeaturedProject }) {
             className="object-cover"
           />
         )}
-      </div>
+      </a>
       <div className="flex flex-col">
         <div className="flex items-center justify-between gap-2">
           <span className="text-foreground">{item.title}</span>
