@@ -21,11 +21,16 @@ function Ext({ href, children }: { href: string; children: React.ReactNode }) {
   )
 }
 
-// Company name with its logo inline; the logo is sized in em so it tracks the text scale.
+// Inline logo sized in em so it tracks the text scale.
+function InlineIcon({ src }: { src: string }) {
+  return <Image src={src} alt="" width={32} height={32} className="mr-[0.35em] inline-block size-[1.05em] rounded-[3px] object-cover align-[-0.17em]" />
+}
+
+// Company name with its logo inline.
 function Org({ icon, href, children }: { icon: string; href: string; children: React.ReactNode }) {
   return (
     <a href={href} target="_blank" rel="noreferrer noopener" className={`whitespace-nowrap ${inlineLink}`}>
-      <Image src={icon} alt="" width={32} height={32} className="mr-[0.35em] inline-block size-[1.05em] rounded-[3px] object-cover align-[-0.17em]" />
+      <InlineIcon src={icon} />
       <span className="trace-underline">{children}</span>
     </a>
   )
@@ -129,7 +134,12 @@ export default function AboutPage() {
   return (
     <PageShell fit mainClassName="mt-[112px] text-muted-foreground">
       <p className="reveal text-pretty" style={{ "--i": 0 } as React.CSSProperties}>
-        I&rsquo;m a <Hi>mechatronics</Hi> student at <Hi>Waterloo</Hi> passionate about <Hi>building and deploying robots</Hi>.
+        I&rsquo;m a <Hi>mechatronics</Hi> student at{" "}
+        <span className="whitespace-nowrap text-foreground">
+          <InlineIcon src="/icons/icon_uw_crest.png" />
+          Waterloo
+        </span>{" "}
+        passionate about <Hi>building and deploying robots</Hi>.
       </p>
 
       <section
