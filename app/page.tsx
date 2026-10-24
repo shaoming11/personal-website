@@ -71,7 +71,7 @@ function ProjectTile({ item }: { item: FeaturedProject }) {
         target="_blank"
         rel="noreferrer noopener"
         aria-label={`${item.title} project`}
-        className="relative block aspect-3/1 overflow-hidden bg-[#d9d9d9] transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-[#cdcdcd] group-focus-within:bg-[#cdcdcd] dark:bg-[#2a2a2a] dark:group-hover:bg-[#333] dark:group-focus-within:bg-[#333]">
+        className="group/media relative block aspect-3/1 overflow-hidden bg-[#d9d9d9] transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-[#cdcdcd] group-focus-within:bg-[#cdcdcd] dark:bg-[#2a2a2a] dark:group-hover:bg-[#333] dark:group-focus-within:bg-[#333]">
         {item.image && (
           <Image
             src={item.image}
@@ -82,6 +82,22 @@ function ProjectTile({ item }: { item: FeaturedProject }) {
             className="object-cover"
           />
         )}
+        {/* Hover outline that traces clockwise from the top-left corner. The stroke is
+            centered on the edge, so half is clipped and 2px shows. */}
+        <svg aria-hidden="true" className="pointer-events-none absolute inset-0 size-full text-foreground">
+          <rect
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            pathLength={1}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="4"
+            strokeDasharray="1"
+            className="[stroke-dashoffset:1] transition-[stroke-dashoffset] duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] group-hover/media:[stroke-dashoffset:0] group-focus-visible/media:[stroke-dashoffset:0] motion-reduce:transition-none"
+          />
+        </svg>
       </a>
       <div className="flex flex-col">
         <div className="flex items-center justify-between gap-2">
