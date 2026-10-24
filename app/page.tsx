@@ -84,7 +84,7 @@ export default function AboutPage() {
   const [exp, setExp] = useState(false)
 
   return (
-    <PageShell mainClassName="mt-[112px] text-muted-foreground">
+    <PageShell fit mainClassName="mt-[112px] text-muted-foreground">
       <p className="reveal text-pretty" style={{ "--i": 0 } as React.CSSProperties}>
         I&rsquo;m a <Hi>mechatronics</Hi> student at <Hi>Waterloo</Hi> passionate about <Hi>building and deploying robots</Hi>.
       </p>

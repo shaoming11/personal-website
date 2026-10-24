@@ -138,14 +138,17 @@ export function PageShell({
   children,
   nav,
   mainClassName = "mt-[71px]",
+  fit = false,
 }: {
   children: React.ReactNode
   nav?: React.ReactNode
   mainClassName?: string
+  // Lock the page to one viewport (no scrolling) on screens big enough to fit it.
+  fit?: boolean
 }) {
   return (
     <div
-      className="min-h-screen bg-background pb-[100px] text-foreground"
+      className={`bg-background text-foreground ${fit ? "min-h-dvh md:[@media(min-height:700px)]:h-dvh md:[@media(min-height:700px)]:overflow-hidden" : "min-h-screen pb-[100px]"}`}
       style={{ fontFamily: "var(--font-roboto-mono), ui-monospace, Menlo, Consolas, monospace", fontSize: fs(17), lineHeight: 2.4 }}
     >
       <SiteHeader />
