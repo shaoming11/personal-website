@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Onest, Roboto_Mono } from 'next/font/google'
 import './globals.css'
+import { SmoothScroll } from '@/components/smooth-scroll'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
 const geistMono = Geist_Mono({
@@ -62,6 +63,7 @@ export default function RootLayout({
         `}} />
       </head>
       <body className="antialiased" style={{ fontFamily: "var(--font-onest)" }}>
+        <SmoothScroll />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

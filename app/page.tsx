@@ -4,6 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { PageShell } from "@/components/site-header"
+import { ProjectVideo } from "@/components/project-video"
 import { featuredProjects, resumeHref, type FeaturedProject } from "@/lib/data"
 import { fs } from "@/lib/utils"
 
@@ -11,13 +12,23 @@ function Hi({ children }: { children: React.ReactNode }) {
   return <span className="text-foreground">{children}</span>
 }
 
-// Company name with its logo inline; the logo is sized in em so it tracks the text scale.
-function Org({ icon, children }: { icon: string; children: React.ReactNode }) {
+const inlineLink = "text-foreground underline decoration-foreground/30 underline-offset-4 transition-[text-decoration-color] hover:decoration-foreground"
+
+function Ext({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <span className="whitespace-nowrap text-foreground">
+    <a href={href} target="_blank" rel="noreferrer noopener" className={inlineLink}>
+      {children}
+    </a>
+  )
+}
+
+// Company name with its logo inline; the logo is sized in em so it tracks the text scale.
+function Org({ icon, href, children }: { icon: string; href: string; children: React.ReactNode }) {
+  return (
+    <a href={href} target="_blank" rel="noreferrer noopener" className={`whitespace-nowrap ${inlineLink}`}>
       <Image src={icon} alt="" width={32} height={32} className="mr-[0.35em] inline-block size-[1.05em] rounded-[3px] object-cover align-[-0.17em]" />
       {children}
-    </span>
+    </a>
   )
 }
 
@@ -55,7 +66,9 @@ function ProjectTile({ item }: { item: FeaturedProject }) {
   return (
     <article className="group flex flex-col gap-2">
       <div className="relative aspect-3/1 overflow-hidden bg-[#d9d9d9] transition-[background-color,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-[3px] group-hover:bg-[#cdcdcd] group-focus-within:-translate-y-[3px] group-focus-within:bg-[#cdcdcd] dark:bg-[#2a2a2a] dark:group-hover:bg-[#333] dark:group-focus-within:bg-[#333]">
-        {item.image && (
+        {item.video ? (
+          <ProjectVideo src={item.video} className="absolute inset-0 size-full object-cover" />
+        ) : item.image && (
           <Image
             src={item.image}
             alt={`${item.title} preview`}
@@ -138,11 +151,11 @@ export default function AboutPage() {
           experience
         </Link>
         <p className={`text-pretty transition-colors duration-300 ${exp ? "text-foreground/80" : "text-muted-foreground"}`}>
-          Currently I&rsquo;m optimizing <Hi>diffusion models</Hi> at <Org icon="/icons/icon_mh.png">Magic Hour</Org>{" "}
-          <Hi>(YC W24)</Hi>, simulating <Hi>humanoids</Hi> at <Org icon="/icons/icon_wato.jpeg">WATonomous</Org>, and leading engineering
-          at <Org icon="/icons/icon_ht6.jpeg">Hack the 6ix</Org> <Hi>(2000+ applicants, $50k+ in sponsorships)</Hi>. Previously I
-          contributed open-source to <Hi>Supervision (49k+ stars)</Hi> at <Org icon="/icons/icon_rb.webp">Roboflow</Org>. Organized{" "}
-          <Org icon="/icons/icon_hc.png">Hack Canada</Org> for <Hi>700+ participants</Hi>.
+          Currently I&rsquo;m optimizing <Hi>diffusion models</Hi> at <Org icon="/icons/icon_mh.png" href="https://magichour.ai">Magic Hour</Org>{" "}
+          <Hi>(YC W24)</Hi>, simulating <Hi>humanoids</Hi> at <Org icon="/icons/icon_wato.jpeg" href="https://watonomous.ca">WATonomous</Org>, and leading engineering
+          at <Org icon="/icons/icon_ht6.jpeg" href="https://hackthe6ix.com">Hack the 6ix</Org> <Hi>(2000+ applicants, $50k+ in sponsorships)</Hi>. Previously I
+          contributed open-source to <Ext href="https://github.com/roboflow/supervision">Supervision</Ext> <Hi>(49k+ stars)</Hi> at <Org icon="/icons/icon_rb.webp" href="https://roboflow.com">Roboflow</Org>. Organized{" "}
+          <Org icon="/icons/icon_hc.png" href="https://hackcanada.org">Hack Canada</Org> for <Hi>700+ participants</Hi>.
         </p>
       </section>
 
