@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { PageShell, SectionsNav } from "@/components/site-header"
 import { experience, type ExperienceCategory } from "@/lib/data"
 import { fs } from "@/lib/utils"
 
@@ -14,7 +13,7 @@ export default function ExperiencePage() {
   const visible = experience.filter((item) => filter === "all" || item.category === filter)
 
   return (
-    <PageShell nav={<SectionsNav />}>
+    <>
       <div
         role="group"
         aria-label="Filter experience"
@@ -38,8 +37,8 @@ export default function ExperiencePage() {
         className="mt-5 grid gap-x-8 gap-y-14"
         style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))", fontSize: fs(16), lineHeight: 1.6 }}
       >
-        {visible.map((item, i) => (
-          <article key={item.id} className="reveal group flex flex-col items-start" style={{ "--i": Math.min(i, 8) } as React.CSSProperties}>
+        {visible.map((item) => (
+          <article key={item.id} className="group flex flex-col items-start">
             {item.image ? (
               <div className="w-full overflow-hidden border-b-2 border-foreground">
                 <Image
@@ -79,7 +78,7 @@ export default function ExperiencePage() {
           </article>
         ))}
       </div>
-    </PageShell>
+    </>
   )
 }
 
