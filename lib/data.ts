@@ -197,6 +197,7 @@ export const projects: ProjectItem[] = [
     id: "the-matrix",
     title: "the matrix",
     description: "Three ESP32 camera cars that navigate a maze as a swarm",
+    image: "/projects/the-matrix.gif",
     github: "https://github.com/VedantSheel08/thematrix",
     demo: "https://devpost.com/software/the-matrix-ws2yiq",
   },
