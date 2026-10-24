@@ -189,13 +189,6 @@ export default function AboutPage() {
       </section>
 
       <nav aria-label="Pages" className="reveal mt-6 flex flex-wrap gap-x-[26px]" style={{ "--i": 3 } as React.CSSProperties}>
-        {/* TODO: point at the writing page once it exists */}
-        <a href="#" onClick={(e) => e.preventDefault()} className="text-foreground">
-          <span className="trace-underline trace-rest">writing</span>
-        </a>
-        <Link href="/people" className="text-foreground">
-          <span className="trace-underline trace-rest">people</span>
-        </Link>
         <a href={resumeHref} target="_blank" rel="noreferrer noopener" className="text-foreground">
           <span className="trace-underline trace-rest">resume</span>
         </a>
