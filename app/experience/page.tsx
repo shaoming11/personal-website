@@ -64,8 +64,10 @@ export default function ExperiencePage() {
             </span>
             <div className="mt-3 flex flex-col gap-0.5">
               {item.github || item.demo ? (
-                <a href={item.github || item.demo} target="_blank" rel="noreferrer noopener" className="text-foreground hover:underline underline-offset-4">
-                  {item.role} at <strong>{item.company}</strong>
+                <a href={item.github || item.demo} target="_blank" rel="noreferrer noopener" className="text-foreground">
+                  <span className="trace-underline">
+                    {item.role} at <strong>{item.company}</strong>
+                  </span>
                 </a>
               ) : (
                 <span className="text-foreground">
@@ -93,7 +95,7 @@ function FilterButton({ active, onClick, children }: { active: boolean; onClick:
           : "min-h-11 py-0 pr-1 text-muted-foreground hover:text-foreground"
       }
     >
-      {children}
+      {active ? children : <span className="trace-underline">{children}</span>}
     </button>
   )
 }

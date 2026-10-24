@@ -85,7 +85,7 @@ export default function SwingPage() {
       <header className="flex items-center justify-between px-6 py-6 mx-auto max-w-3xl">
         <Link href="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
-          Back
+          <span className="trace-underline">Back</span>
         </Link>
         <a
           href="https://github.com/shaoming11/swing-trader"
@@ -93,7 +93,7 @@ export default function SwingPage() {
           rel="noreferrer noopener"
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
         >
-          GitHub
+          <span className="trace-underline">GitHub</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>
       </header>
@@ -134,7 +134,7 @@ export default function SwingPage() {
             An AI-powered swing trade analysis pipeline. Given a ticker and a date window, it pulls structured financial data, retrieves and reranks relevant news/analyst/sentiment chunks via RAG, reasons over the context with multiple analyst personas, synthesizes a judge verdict, validates it through guardrails, and outputs a calibrated position card.
           </p>
           <p className="mt-3 text-muted-foreground text-sm leading-relaxed">
-            Check out the <a href="https://github.com/shaoming11/swing-trader" target="_blank" rel="noreferrer noopener" className="underline hover:text-foreground transition-colors">GitHub</a> to run the project locally.
+            Check out the <a href="https://github.com/shaoming11/swing-trader" target="_blank" rel="noreferrer noopener" className="hover:text-foreground transition-colors"><span className="trace-underline trace-rest">GitHub</span></a> to run the project locally.
           </p>
         </div>
       </div>
