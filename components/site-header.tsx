@@ -44,7 +44,7 @@ function EmailButton() {
       <span role="status" aria-live="polite" className="sr-only">
         {visible ? "email copied" : ""}
       </span>
-      {/* Portaled: the header's reveal animation leaves a transform that would trap position: fixed. */}
+      {/* Portaled to body so position: fixed always tracks the viewport, whatever the ancestors do. */}
       {pos &&
         createPortal(
           <span
@@ -70,7 +70,7 @@ function EmailButton() {
 export function SiteHeader() {
   return (
     <header
-      className="reveal flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 text-foreground"
+      className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 text-foreground"
       style={{ padding: "30px clamp(20px, 3.2vw, 46px) 0", fontSize: fs(16), lineHeight: 1.7 }}
     >
       <Link href="/">
@@ -137,7 +137,7 @@ export function SectionsNav() {
   }, [])
 
   return (
-    <nav aria-label="Sections" className="reveal flex flex-col items-start" style={{ "--i": 1 } as React.CSSProperties}>
+    <nav aria-label="Sections" className="flex flex-col items-start">
       <BackLink />
       <div ref={rowRef} className="relative flex flex-wrap gap-x-[26px]">
         {navItems.map((item) => {

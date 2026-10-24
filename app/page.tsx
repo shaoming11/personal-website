@@ -133,7 +133,7 @@ export default function AboutPage() {
 
   return (
     <PageShell fit mainClassName="mt-[112px] text-muted-foreground">
-      <p className="reveal text-pretty" style={{ "--i": 0 } as React.CSSProperties}>
+      <p className="text-pretty">
         I&rsquo;m a <Hi>mechatronics</Hi> student at{" "}
         <Org icon="/icons/icon_uw_crest.png" href="https://uwaterloo.ca">
           Waterloo
@@ -143,8 +143,7 @@ export default function AboutPage() {
 
       <section
         aria-label="Selected projects"
-        className="reveal mt-4"
-        style={{ "--i": 1 } as React.CSSProperties}
+        className="mt-4"
       >
         <Link
           href="/projects"
@@ -165,8 +164,7 @@ export default function AboutPage() {
 
       <section
         aria-label="Experience"
-        className="reveal mt-[30px] max-w-[640px]"
-        style={{ "--i": 2 } as React.CSSProperties}
+        className="mt-[30px] max-w-[640px]"
         onMouseEnter={() => setExp(true)}
         onMouseLeave={() => setExp(false)}
       >
@@ -188,7 +186,7 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <nav aria-label="Pages" className="reveal mt-6 flex flex-wrap gap-x-[26px]" style={{ "--i": 3 } as React.CSSProperties}>
+      <nav aria-label="Pages" className="mt-6 flex flex-wrap gap-x-[26px]">
         <a href={resumeHref} target="_blank" rel="noreferrer noopener" className="text-foreground">
           <span className="trace-underline trace-rest">resume</span>
         </a>

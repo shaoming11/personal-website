@@ -180,11 +180,6 @@
 }
 
 @layer utilities {
-  .reveal {
-    animation: reveal-up 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: calc(var(--i, 0) * 45ms);
-  }
-
   /* Film-grain overlay for gradient backdrops. The element needs position: relative. */
   .grain::after {
     content: "";
@@ -222,26 +217,10 @@
   }
 }
 
-@keyframes reveal-up {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-  .reveal {
-    animation: none;
-    opacity: 1;
-    transform: none;
   }
 }
