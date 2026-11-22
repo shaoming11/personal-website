@@ -15,23 +15,27 @@ const robotoMono = Roboto_Mono({ variable: '--font-roboto-mono', subsets: ['lati
 export const metadata: Metadata = {
   title: 'Shaoming Wu',
   description: 'Incoming mechatronics engineering student at the University of Waterloo who likes to build things.',
-  generator: 'v0.app',
+  metadataBase: new URL('https://shaomingwu.com'),
   icons: {
     icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
     apple: '/apple-icon.png',
+  },
+  openGraph: {
+    title: 'Shaoming Wu',
+    description: 'Incoming mechatronics engineering student at the University of Waterloo who likes to build things.',
+    url: '/',
+    siteName: 'Shaoming Wu',
+    type: 'website',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Shaoming Wu' }],
+    // Next doesn't resolve video URLs against metadataBase, so these must be absolute.
+    videos: [{ url: 'https://shaomingwu.com/og.mp4', secureUrl: 'https://shaomingwu.com/og.mp4', type: 'video/mp4', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og.png'],
   },
 }
 

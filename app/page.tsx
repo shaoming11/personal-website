@@ -70,13 +70,13 @@ function ProjectTile({ item }: { item: FeaturedProject }) {
   // Media links to the writeup when there is one, otherwise the code.
   const href = item.demo ?? item.code
   return (
-    <article className="group flex flex-col gap-2">
+    <article className="group flex flex-col gap-stack-sm">
       <a
         href={href}
         target="_blank"
         rel="noreferrer noopener"
         aria-label={`${item.title} project`}
-        className="group/media relative block aspect-3/1 overflow-hidden bg-[#d9d9d9] transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-[#cdcdcd] group-focus-within:bg-[#cdcdcd] dark:bg-[#2a2a2a] dark:group-hover:bg-[#333] dark:group-focus-within:bg-[#333]">
+        className="group/media relative block aspect-12/5 overflow-hidden bg-[#d9d9d9] transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-[#cdcdcd] group-focus-within:bg-[#cdcdcd] dark:bg-[#2a2a2a] dark:group-hover:bg-[#333] dark:group-focus-within:bg-[#333]">
         {item.image && (
           <Image
             src={item.image}
@@ -105,7 +105,7 @@ function ProjectTile({ item }: { item: FeaturedProject }) {
         </svg>
       </a>
       <div className="flex flex-col">
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between gap-stack-xs">
           <span className="text-foreground">{item.title}</span>
           <div className="-mr-2 flex gap-0.5">
             {item.code && (
@@ -132,7 +132,7 @@ export default function AboutPage() {
   const [exp, setExp] = useState(false)
 
   return (
-    <PageShell fit mainClassName="mt-[112px] text-muted-foreground">
+    <PageShell fit mainClassName="mt-page text-muted-foreground">
       <p className="text-pretty">
         I&rsquo;m a <Hi>mechatronics</Hi> student at{" "}
         <Org icon="/icons/icon_uw_crest.png" href="https://uwaterloo.ca">
@@ -143,7 +143,7 @@ export default function AboutPage() {
 
       <section
         aria-label="Selected projects"
-        className="mt-4"
+        className="mt-stack-lg"
       >
         <Link
           href="/projects"
@@ -153,7 +153,7 @@ export default function AboutPage() {
           <span className="trace-underline trace-rest">projects</span>
         </Link>
         <div
-          className="mt-1.5 grid grid-cols-1 gap-x-[30px] gap-y-8 lg:grid-cols-3"
+          className="mt-stack-xs grid grid-cols-1 gap-x-stack-lg gap-y-stack-xl lg:grid-cols-3"
           style={{ fontSize: fs(16), lineHeight: 1.8 }}
         >
           {featuredProjects.map((item) => (
@@ -164,7 +164,7 @@ export default function AboutPage() {
 
       <section
         aria-label="Experience"
-        className="mt-[30px] max-w-[640px]"
+        className="mt-stack-lg max-w-[640px]"
         onMouseEnter={() => setExp(true)}
         onMouseLeave={() => setExp(false)}
       >
@@ -186,7 +186,7 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <nav aria-label="Pages" className="mt-6 flex flex-wrap gap-x-[26px]">
+      <nav aria-label="Pages" className="mt-stack-lg flex flex-wrap gap-x-stack-md">
         <a href={resumeHref} target="_blank" rel="noreferrer noopener" className="text-foreground">
           <span className="trace-underline trace-rest">resume</span>
         </a>

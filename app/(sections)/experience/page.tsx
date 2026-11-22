@@ -33,7 +33,7 @@ export default function ExperiencePage() {
       <div
         role="group"
         aria-label="Filter experience"
-        className="mt-5 flex flex-wrap items-center gap-x-2.5 text-muted-foreground"
+        className="mt-stack-xs flex flex-wrap items-center gap-x-stack-xs text-muted-foreground"
         style={{ fontSize: fs(15), lineHeight: 1.6 }}
       >
         <FilterButton active={filter === "all"} onClick={() => setFilter("all")}>
@@ -50,7 +50,7 @@ export default function ExperiencePage() {
       </div>
 
       <div
-        className="mt-5 grid gap-x-8 gap-y-14"
+        className="mt-stack-sm grid gap-x-stack-lg gap-y-stack-xl"
         style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(340px, 100%), 1fr))", fontSize: fs(16), lineHeight: 1.6 }}
       >
         {visible.map((item) => (
@@ -80,7 +80,7 @@ export default function ExperiencePage() {
             >
               {item.category}
             </span>
-            <div className="mt-3 flex flex-col gap-0.5">
+            <div className="mt-stack-sm flex flex-col gap-stack-2xs">
               {item.github || item.demo ? (
                 <a href={item.github || item.demo} target="_blank" rel="noreferrer noopener" className="text-foreground">
                   <span className="trace-underline">

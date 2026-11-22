@@ -70,13 +70,13 @@ function EmailButton() {
 export function SiteHeader() {
   return (
     <header
-      className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 text-foreground"
-      style={{ padding: "30px clamp(20px, 3.2vw, 46px) 0", fontSize: fs(16), lineHeight: 1.7 }}
+      className="flex flex-wrap items-baseline justify-between gap-x-stack-lg gap-y-stack-2xs px-gutter pt-gutter text-foreground"
+      style={{ fontSize: fs(16), lineHeight: 1.7 }}
     >
       <Link href="/">
         <span className="trace-underline">shaoming wu</span>
       </Link>
-      <nav aria-label="Social links" className="flex flex-wrap gap-x-5">
+      <nav aria-label="Social links" className="flex flex-wrap gap-x-stack-md">
         {socials.map((s) => (
           <a
             key={s.label}
@@ -139,7 +139,7 @@ export function SectionsNav() {
   return (
     <nav aria-label="Sections" className="flex flex-col items-start">
       <BackLink />
-      <div ref={rowRef} className="relative flex flex-wrap gap-x-[26px]">
+      <div ref={rowRef} className="relative flex flex-wrap gap-x-stack-md">
         {navItems.map((item) => {
           const active = pathname === item.href
           return (
@@ -175,7 +175,7 @@ export function SectionsNav() {
 export function PageShell({
   children,
   nav,
-  mainClassName = "mt-[71px]",
+  mainClassName = "mt-page",
   fit = false,
 }: {
   children: React.ReactNode
@@ -186,11 +186,11 @@ export function PageShell({
 }) {
   return (
     <div
-      className={`bg-background text-foreground ${fit ? "min-h-dvh lg:[@media(min-height:700px)]:h-dvh lg:[@media(min-height:700px)]:overflow-hidden" : "min-h-screen pb-[100px]"}`}
+      className={`bg-background text-foreground ${fit ? "min-h-dvh lg:[@media(min-height:800px)]:h-dvh lg:[@media(min-height:800px)]:overflow-hidden" : "min-h-screen pb-page"}`}
       style={{ fontFamily: "var(--font-roboto-mono), ui-monospace, Menlo, Consolas, monospace", fontSize: fs(17), lineHeight: 2.4 }}
     >
       <SiteHeader />
-      <main className={`mx-auto w-full max-w-[1020px] px-5 ${mainClassName}`}>
+      <main className={`mx-auto w-full max-w-[1020px] px-gutter ${mainClassName}`}>
         {nav}
         {children}
       </main>

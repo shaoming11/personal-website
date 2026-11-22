@@ -49,6 +49,21 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* Spacing scale. Smaller steps bind tighter: a card's title to its blurb (2xs),
+   media to caption (sm), a heading to its content (xs/md), sibling blocks (lg),
+   grid rows (xl). The larger steps flex with the viewport so phones stay compact.
+   Use as Tailwind utilities: mt-stack-md, gap-x-stack-lg, px-gutter, mt-page. */
+@theme {
+  --spacing-stack-2xs: 2px;
+  --spacing-stack-xs: 8px;
+  --spacing-stack-sm: 12px;
+  --spacing-stack-md: 20px;
+  --spacing-stack-lg: clamp(24px, 3vw, 32px);
+  --spacing-stack-xl: clamp(36px, 5vw, 56px);
+  --spacing-gutter: clamp(20px, 3.2vw, 40px);
+  --spacing-page: clamp(32px, 6vh, 80px);
+}
+
 :root {
   color-scheme: light;
   --text-scale: 0.88;
