@@ -1,4 +1,4 @@
-"""Generate the dithered, glowing favicon set (smiley) and og media (robot hand peace sign).
+"""Generate the black + red favicon set (stone statue photo) and og media (robotic hand waving).
 
 Run: python3 scripts/dither-icons.py   (needs Pillow, numpy, ffmpeg, macOS Menlo font)
 Writes public/icon.svg, icon-32x32.png, apple-icon.png, og.png, og.mp4.
@@ -9,7 +9,7 @@ import tempfile
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 PUBLIC = Path(__file__).resolve().parent.parent / "public"
 FONT = "/System/Library/Fonts/Menlo.ttc"  # index 1 = Bold
@@ -65,20 +65,20 @@ def down(img):
     return img.resize((img.width // SS, img.height // SS), Image.BOX)
 
 
-# ---------- favicon: smiley ----------
+# ---------- favicon: stone statue with Fuji behind, flat black + red tones ----------
 
-def smiley(n):
-    """Filled glowing face with dark eyes and smile (reads at 16px)."""
-    img, d = canvas(n, n)
-    u = n * SS
-    r, c = 0.4 * u, u / 2
-    d.ellipse((c - r, c - r, c + r, c + r), fill=255)
-    sil = down(img)
-    ew, eh = max(1.3, 0.09 * n) * SS, max(2.2, 0.16 * n) * SS
-    for ex in (0.37, 0.63):
-        d.ellipse((ex * u - ew / 2, 0.4 * u - eh / 2, ex * u + ew / 2, 0.4 * u + eh / 2), fill=0)
-    d.arc((0.27 * u, 0.24 * u, 0.73 * u, 0.73 * u), 30, 150, fill=0, width=round(max(1.4, n * 0.085) * SS))
-    return dither(halo(down(img), sil, n * 0.12, n * 0.03))
+SOURCE = Path(__file__).resolve().parent / "assets" / "favicon-source.png"
+STATUE_CROP = (95, 128, 305, 338)  # square around the statue, Fuji's peak along the top
+
+
+def statue(n, levels=4):
+    """Photo -> n x n grayscale -> `levels` flat tones of the site red (black .. full red)."""
+    img = Image.open(SOURCE).convert("RGB").crop(STATUE_CROP)
+    img = img.filter(ImageFilter.GaussianBlur(img.width / n * 0.07))
+    g = ImageOps.autocontrast(img.convert("L"), cutoff=1).resize((n, n), Image.BOX)
+    q = np.round(np.asarray(g, dtype=float) / 255 * (levels - 1))
+    rgb = (q[..., None] / (levels - 1) * TINT).astype(np.uint8)
+    return rgb, q
 
 
 def png(rgb, scale, path):
@@ -106,10 +106,12 @@ def svg(rgb, q, path):
     )
 
 
-# ---------- og: robot hand doing a peace sign ----------
+# ---------- og: robotic hand waving, name with a roving spotlight ----------
 
 W, H, SCALE = 400, 210, 3  # dither grid, upscaled 3x -> 1200x630
-FPS, SECONDS = 24, 4
+FPS, SECONDS = 24, 2.5  # one wave per second
+HAND_SCALE = 1.12
+NAME_SIZE = 36
 
 
 def ease(t):
@@ -117,105 +119,208 @@ def ease(t):
     return t * t * (3 - 2 * t)
 
 
-def capsule(d, a, b, w, fill):
-    d.line((a, b), fill=fill, width=round(w))
-    for x, y in (a, b):
-        d.ellipse((x - w / 2, y - w / 2, x + w / 2, y + w / 2), fill=fill)
+def window(t, a, b, c, d):
+    """0 -> 1 between a..b, back to 0 between c..d."""
+    return ease((t - a) / (b - a)) * (1 - ease((t - c) / (d - c)))
 
 
-def finger(d, base, angle, lengths, curl, width):
-    """Segmented robot finger seen palm-on. Curling foreshortens and folds segments down."""
-    s = SS
-    dx, dy = math.sin(math.radians(angle)), -math.cos(math.radians(angle))
-    bends = (85, 100, 70)
-    theta, p = 0.0, base
-    for L, bend in zip(lengths, bends):
-        theta += curl * bend
-        k = L * math.cos(math.radians(theta))
-        q = (p[0] + dx * k, p[1] + dy * k)
-        # joint gap: shrink each segment a little at both ends
-        g = 1.6 if abs(k) > 3.2 else 0
-        u = (q[0] - p[0], q[1] - p[1])
-        n = math.hypot(*u) or 1
-        a = (p[0] + u[0] / n * g, p[1] + u[1] / n * g)
-        b = (q[0] - u[0] / n * g, q[1] - u[1] / n * g)
-        capsule(d, (a[0] * s, a[1] * s), (b[0] * s, b[1] * s), (width + 3) * s, 0)  # dark outline
-        capsule(d, (a[0] * s, a[1] * s), (b[0] * s, b[1] * s), width * s, 255)
-        p = q
+class Pen:
+    """Tiny canvas-style 2D transform stack drawing filled shapes onto a supersampled mask."""
+
+    def __init__(self, img):
+        self.d = ImageDraw.Draw(img)
+        self.m = np.eye(3)
+        self.stack = []
+
+    def save(self):
+        self.stack.append(self.m.copy())
+
+    def restore(self):
+        self.m = self.stack.pop()
+
+    def translate(self, x, y):
+        self.m = self.m @ np.array([[1, 0, x], [0, 1, y], [0, 0, 1]])
+
+    def rotate(self, rad):
+        c, s = math.cos(rad), math.sin(rad)
+        self.m = self.m @ np.array([[c, -s, 0], [s, c, 0], [0, 0, 1]])
+
+    def scale(self, k):
+        self.m = self.m @ np.diag([k, k, 1])
+
+    def _pts(self, pts):
+        p = np.c_[np.asarray(pts, dtype=float), np.ones(len(pts))] @ self.m.T
+        return [(x * SS, y * SS) for x, y, _ in p]
+
+    def _unit(self):
+        return math.hypot(self.m[0, 0], self.m[1, 0]) * SS
+
+    def poly(self, pts, fill):
+        self.d.polygon(self._pts(pts), fill=fill)
+
+    def rrect(self, x, y, w, h, r, fill):
+        r = r if isinstance(r, (list, tuple)) else [r] * 4  # tl, tr, br, bl
+        r = [min(v, w / 2, h / 2) for v in r]
+        pts = []
+        for (cx, cy, rad, a0) in ((x + w - r[1], y + r[1], r[1], -90), (x + w - r[2], y + h - r[2], r[2], 0),
+                                  (x + r[3], y + h - r[3], r[3], 90), (x + r[0], y + r[0], r[0], 180)):
+            for k in range(7):
+                a = math.radians(a0 + 15 * k)
+                pts.append((cx + rad * math.cos(a), cy + rad * math.sin(a)))
+        self.poly(pts, fill)
+
+    def circle(self, x, y, r, fill):
+        self.poly([(x + r * math.cos(a), y + r * math.sin(a)) for a in np.linspace(0, 2 * math.pi, 16, endpoint=False)], fill)
+
+    def line(self, pts, width, fill):
+        self.d.line(self._pts(pts), fill=fill, width=max(1, round(width * self._unit())), joint="curve")
 
 
-def hand(t):
-    """Hand mask at time t (seconds) on the W x H grid."""
-    # timeline: fist -> peace (pop) -> hold + bounce -> fist
-    up = ease((t - 0.5) / 0.45)
-    downc = ease((t - 3.05) / 0.45)
-    open_ = up * (1 - downc)
-    bounce = math.sin((t - 1.0) * 2 * math.pi * 1.25) * (1 if 1.0 < t < 2.95 else 0) * open_
-    tilt = -7 * open_ + 1.5 * bounce
-
-    img, d = canvas(W, H)
-    s = SS
-    cx = 100
-    # wrist: stacked bands
-    for i, (y0, y1) in enumerate(((171, 183), (186, 198), (201, 214))):
-        d.rounded_rectangle(((cx - 22 + i) * s, y0 * s, (cx + 22 - i) * s, y1 * s), radius=3 * s, fill=255)
-    # palm with a bolt
-    d.rounded_rectangle(((cx - 38) * s, 108 * s, (cx + 38) * s, 168 * s), radius=12 * s, fill=255)
-    d.ellipse(((cx - 6) * s, 132 * s, (cx + 6) * s, 144 * s), fill=0)
-    d.ellipse(((cx - 3) * s, 135 * s, (cx + 3) * s, 141 * s), fill=255)
-
-    fw = 14
-    spread = 11 * open_ + 3 * bounce
-    curls = (1 - open_, 1 - open_, 1, 1)  # index, middle, ring, pinky
-    xs = (cx - 28, cx - 9.5, cx + 9.5, cx + 28)
-    scales = (1.0, 1.1, 0.95, 0.8)
-    angles = (-spread, spread, 4, 8)
-    # curled fingers first, then the thumb over them, then the raised two on top
-    for i in (2, 3):
-        finger(d, (xs[i], 110), angles[i], [L * scales[i] for L in (30, 22, 17)], curls[i], fw)
-    th = 62 + 6 * (1 - open_)  # thumb folded across the palm
-    finger(d, (cx - 34, 150), th, (22, 17), 0.15, fw + 1)
-    for i in (0, 1):
-        finger(d, (xs[i], 110), angles[i], [L * scales[i] for L in (30, 22, 17)], curls[i], fw)
-
-    img = img.rotate(tilt, resample=Image.BICUBIC, center=(cx * s, 200 * s))
-    img = img.transform(img.size, Image.AFFINE, (1, 0, 0, 0, 1, 10 * s))  # nudge up
-    m = down(img)
-    sil = m.filter(ImageFilter.MaxFilter(5)).filter(ImageFilter.MinFilter(5))  # close joint gaps
-    return m, sil
+def seg(pen, st, en, w, core, tip):
+    L = max(1, math.hypot(en[0] - st[0], en[1] - st[1]))
+    pen.save()
+    pen.translate(*st)
+    pen.rotate(math.atan2(en[1] - st[1], en[0] - st[0]))
+    if core:
+        pen.rrect(-1.2, -w / 2 - 1.2, L + 2.4, w + 2.4, 2, 0)  # dark outline keeps segments apart
+    rt = min(w / 2, 3.2)
+    pen.rrect(0, -w / 2, L, w, [1, rt, rt, 1] if tip else 1.2, 255)
+    pen.restore()
 
 
-def text_layer():
+def finger(pen, base, ang, lens, curl, w, core, bends=(85, 100, 70)):
+    """Segmented finger seen palm-on; curling foreshortens segments and folds them back down."""
+    a = math.radians(ang)
+    dx, dy = math.sin(a), -math.cos(a)
+    g = 1.3 if core else 0  # half the gap between segments
+    th, p, joints = 0.0, base, [base]
+    for i, L in enumerate(lens):
+        th += curl * bends[i]
+        k = L * math.cos(math.radians(th))
+        s = -1 if k < 0 else 1
+        ln = max(3.6, abs(k))
+        seg(pen, (p[0] + dx * s * g, p[1] + dy * s * g), (p[0] + dx * s * (ln - g), p[1] + dy * s * (ln - g)), w, core, i == len(lens) - 1)
+        p = (p[0] + dx * s * ln, p[1] + dy * s * ln)
+        joints.append(p)
+    if core:  # slim axle bridging each gap
+        for j in joints[1:-1]:
+            pen.save(); pen.translate(*j); pen.rotate(a)
+            pen.rrect(-w * 0.22, -g - 0.6, w * 0.44, 2 * g + 1.2, 0, 255)
+            pen.restore()
+
+
+PALM = [(-15, -22), (15, -22), (19, -26), (23, -58), (19, -62), (-19, -62), (-23, -58), (-19, -26)]
+
+
+def draw_hand(pen, P, core):
+    pen.save()
+    pen.translate(P["cx"], P["cy"])
+    pen.rotate(math.radians(P["rot"]))
+    pen.scale(P["sc"])
+    pen.rrect(-11, -4, 22, 70, 2, 255)  # forearm
+    if core:
+        pen.line([(-5, 4), (-5, 46)], 1, 0)
+        pen.line([(5, 4), (5, 46)], 1, 0)
+        pen.rrect(-15.5, -19.5, 31, 12, 3, 0)
+    pen.rrect(-14, -18, 28, 9, 2.5, 255)  # wrist collar
+    if core:
+        pen.poly([(x * 1.07, y + (y + 42) * 0.03) for x, y in PALM], 0)
+    pen.poly(PALM, 255)
+    if core:
+        inner = [(x * 0.62, -42 + (y + 42) * 0.62) for x, y in PALM]
+        pen.line(inner + inner[:1], 1.1, 0)
+        for x, y in ((-13, -28), (13, -28), (-15, -55), (15, -55)):
+            pen.circle(x, y, 1, 0)
+        pen.rrect(-24, -70.5, 48, 8, 2, 0)
+    pen.rrect(-23, -69.5, 46, 6, 2, 255)  # knuckle bar
+    xs, scales, L = (-16.5, -5.5, 5.5, 16.5), (1, 1.1, 1, 0.82), (19, 14, 11)
+    curls, spread = P["curls"], P["spread"]
+    order = sorted(range(4), key=lambda i: -curls[i])
+    draw = lambda i: finger(pen, (xs[i], -70), spread[i], [l * scales[i] for l in L], curls[i], 8.4, core)
+    for i in order:
+        if curls[i] > 0.5:
+            draw(i)
+    finger(pen, (-21, -38), P["thumb_ang"], (14, 11), P["thumb_curl"], 9, core, (40, 50))
+    for i in order:
+        if curls[i] <= 0.5:
+            draw(i)
+    pen.restore()
+
+
+def wave_pose(t):
+    """t in [0, 1): relax -> open and wave -> relax, seamless loop."""
+    o = window(t, 0.05, 0.15, 0.85, 0.95)
+    return {
+        "curls": [c + (1 - o) * 0.7 for c in (0.15 * (1 - o), 0, 0, 0.1)],
+        "spread": [s * o for s in (-6, -2, 2, 7)],
+        "thumb_ang": -35 * o + 40 * (1 - o),
+        "thumb_curl": 0.1,
+        "rot": 16 * math.sin(t * math.pi * 2 * 2.5) * o,
+        "sc": HAND_SCALE,
+    }
+
+
+def layout():
+    """Hand slot + name block, centred together horizontally."""
+    f = font(NAME_SIZE)
+    name_w = max(f.getlength(s) for s in ("Shaoming", "Wu"))
+    palm, gap = 48 * HAND_SCALE, 40  # centre on the hand's body, not its swing
+    left = (W - (palm + gap + name_w)) / 2
+    return {"hand_cx": left + palm / 2, "name_x": left + palm + gap, "name_w": name_w}
+
+
+def hand_masks(t, lay):
+    P = dict(wave_pose(t), cx=lay["hand_cx"], cy=H - 30)
+    out = []
+    for core in (True, False):
+        img, _ = canvas(W, H)
+        draw_hand(Pen(img), P, core)
+        out.append(down(img))
+    return out  # core (with gaps), silhouette (gaps closed)
+
+
+def name_layers(lay):
+    f = font(NAME_SIZE)
+    x = lay["name_x"]
+    gap, sub_gap = NAME_SIZE * 1.05, 30
+    y1 = H / 2 - (NAME_SIZE * 0.73 + gap + sub_gap) / 2 + NAME_SIZE * 0.73
     m = Image.new("L", (W, H), 0)
     d = ImageDraw.Draw(m)
-    left, right = 206, W - 24
-    size = 80
-    while size > 10:
-        f = font(size)
-        if max(d.textlength(t, font=f) for t in ("Shaoming", "Wu")) <= right - left:
-            break
-        size -= 1
-    gap, sub_gap = size * 1.05, 30
-    y1 = H / 2 - (size * 0.73 + gap + sub_gap) / 2 + size * 0.73
-    d.text((left, y1), "Shaoming", fill=255, font=f, anchor="ls")
-    d.text((left, y1 + gap), "Wu", fill=255, font=f, anchor="ls")
-    lum = glow(m, 3.5, 1)
+    d.text((x, y1), "Shaoming", fill=255, font=f, anchor="ls")
+    d.text((x, y1 + gap), "Wu", fill=255, font=f, anchor="ls")
     sub = Image.new("L", (W, H), 0)
-    ImageDraw.Draw(sub).text((left + 1, y1 + gap + sub_gap), "shaomingwu.com", fill=255, font=font(15), anchor="ls")
-    return np.maximum(lum, np.asarray(sub, dtype=float) / 255 * 0.55)
+    ImageDraw.Draw(sub).text((x + 1, y1 + gap + sub_gap), "shaomingwu.com", fill=255, font=font(13), anchor="ls")
+    centre = (x + lay["name_w"] / 2, y1 - NAME_SIZE * 0.36 + gap / 2)
+    return m, np.asarray(sub, dtype=float) / 255 * 0.55, centre
 
 
-def og_frame(t, text):
-    rgb, _ = dither(np.maximum(halo(*hand(t), 6, 1.5), text))
+def spotlight(t, centre):
+    """Soft light drifting under the name on a figure-eight, one full loop per video loop."""
+    X = centre[0] + 64 * math.sin(2 * math.pi * t)
+    Y = centre[1] + 14 * math.sin(4 * math.pi * t)
+    yy, xx = np.mgrid[0:H, 0:W]
+    return 0.55 * np.clip(1 - np.hypot(xx - X, yy - Y) / 40, 0, 1)
+
+
+def og_frame(t, lay, name):
+    """t in [0, 1)."""
+    text, sub, centre = name
+    core, sil = hand_masks(t, lay)
+    a = np.asarray(text, dtype=float) / 255
+    words = np.where(a > 0.5, a, np.maximum(glow(text, 4.5, 1.3), spotlight(t, centre)))
+    lum = np.maximum.reduce([halo(core, sil, 5.5, 1.6), words, sub])
+    rgb, _ = dither(lum)
     return Image.fromarray(rgb).resize((W * SCALE, H * SCALE), Image.NEAREST)
 
 
 def og(png_path, mp4_path):
-    text = text_layer()
-    og_frame(2.0, text).save(png_path)
+    lay = layout()
+    name = name_layers(lay)
+    og_frame(0.4, lay, name).save(png_path)  # hand open and upright
+    n = round(FPS * SECONDS)
     with tempfile.TemporaryDirectory() as tmp:
-        for i in range(FPS * SECONDS):
-            og_frame(i / FPS, text).save(f"{tmp}/f{i:03d}.png")
+        for i in range(n):
+            og_frame(i / n, lay, name).save(f"{tmp}/f{i:03d}.png")
         subprocess.run(
             ["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(FPS), "-i", f"{tmp}/f%03d.png",
              "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "16", "-preset", "slow",
@@ -225,9 +330,9 @@ def og(png_path, mp4_path):
 
 
 if __name__ == "__main__":
-    rgb32, q32 = smiley(32)
+    rgb32, q32 = statue(32)
     svg(rgb32, q32, PUBLIC / "icon.svg")
     png(rgb32, 1, PUBLIC / "icon-32x32.png")
-    png(smiley(45)[0], 4, PUBLIC / "apple-icon.png")  # 180x180
+    png(statue(45)[0], 4, PUBLIC / "apple-icon.png")  # 180x180
     og(PUBLIC / "og.png", PUBLIC / "og.mp4")
     print("wrote icon.svg, icon-32x32.png, apple-icon.png, og.png, og.mp4")
